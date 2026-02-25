@@ -12,6 +12,57 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.EmpleoLocal">
         <activity
+            android:name=".activity_lista_ofertas"
+            android:exported="false" />
+        <activity
+            android:name=".activity_seguimiento_postulacion"
+            android:exported="false" />
+        <activity
+            android:name=".activity_filtrar_ofertas"
+            android:exported="false" />
+        <activity
+            android:name=".activity_notificaciones"
+            android:exported="false" />
+        <activity
+            android:name=".activity_empleos_guardados"
+            android:exported="false" />
+        <activity
+            android:name=".activity_perfil_empresa"
+            android:exported="false" />
+        <activity
+            android:name=".activity_detalle_oferta"
+            android:exported="false" />
+        <activity
+            android:name=".activity_perfil"
+            android:exported="false" />
+        <activity
+            android:name=".activity_postulaciones"
+            android:exported="false" />
+        <activity
+            android:name=".activity_mapa_empleos"
+            android:exported="false" />
+        <activity
+            android:name=".activity_inicio"
+            android:exported="false" />
+        <activity
+            android:name=".activity_registro_paso_3"
+            android:exported="false" />
+        <activity
+            android:name=".activity_registro_paso_2"
+            android:exported="false" />
+        <activity
+            android:name=".activity_registro_paso_1"
+            android:exported="false" />
+        <activity
+            android:name=".activity_iniciar_sesion"
+            android:exported="false" />
+        <activity
+            android:name=".activity_bienvenida"
+            android:exported="false" />
+        <activity
+            android:name=".MainActivity2"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
