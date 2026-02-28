@@ -8,6 +8,16 @@
         <item name="navigationIconTint">@color/appbar_title</item>
     </style>
 
+    <style name="Widget.EmpleoLocal.Toolbar.Login" parent="Widget.EmpleoLocal.Toolbar">
+        <item name="titleTextColor">@color/blue_selected</item>
+        <item name="titleTextAppearance">@style/TextAppearance.LoginToolbar</item>
+    </style>
+
+    <style name="TextAppearance.LoginToolbar" parent="TextAppearance.Material3.TitleMedium">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
     <!-- Estilo para la Navegación Inferior -->
     <style name="Widget.EmpleoLocal.BottomNav" parent="Widget.Material3.BottomNavigationView">
         <item name="android:background">@color/bottom_bg</item>
@@ -70,6 +80,16 @@
         <item name="strokeColor">@color/white</item>
         <item name="strokeWidth">2dp</item>
         <item name="shapeAppearanceOverlay">@style/ShapeAppearance.LargeComponent.Rounded</item>
+    </style>
+
+    <!-- Estilos para Inputs de Login -->
+    <style name="LoginInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/login_input_stroke</item>
+        <item name="boxBackgroundColor">@color/white</item>
+        <item name="hintEnabled">false</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearance.LargeComponent.Rounded</item>
+        <item name="startIconTint">@color/login_subtitle</item>
+        <item name="endIconTint">@color/login_subtitle</item>
     </style>
 
     <style name="ShapeAppearance.LargeComponent.Rounded" parent="">

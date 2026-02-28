@@ -26,4 +26,14 @@
 
     <!-- Bienvenida Screen -->
     <color name="blue_bg">#1F89E5</color>
+
+    <!-- Iniciar Sesión Screen -->
+    <color name="login_bg">#F5F7FA</color>
+    <color name="login_logo_text">#111518</color>
+    <color name="login_subtitle">#637788</color>
+    <color name="login_label">#111518</color>
+    <color name="login_input_bg">#FFFFFF</color>
+    <color name="login_input_stroke">#E8EDF2</color>
+    <color name="login_hint">#637788</color>
+    <color name="login_blue_text">#1F89E5</color>
 </resources>

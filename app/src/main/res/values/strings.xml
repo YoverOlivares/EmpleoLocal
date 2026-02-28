@@ -10,4 +10,70 @@
     <string name="welcome_subtitle">Tu empleo más cercano</string>
     <string name="btn_iniciar_sesion">Iniciar Sesión</string>
     <string name="btn_registrarse">Registrarse</string>
+
+    <!-- Iniciar Sesión Screen -->
+    <string name="login_title">Iniciar Sesión</string>
+    <string name="login_welcome_subtitle">Tu portal de empleo local</string>
+    <string name="login_email_label">Correo electrónico</string>
+    <string name="login_email_hint">ejemplo@correo.com</string>
+    <string name="login_password_label">Contraseña</string>
+    <string name="login_forgot_password">¿Olvidaste tu contraseña?</string>
+    <string name="login_security_notice">Tus datos están cifrados y protegidos</string>
+    <string name="login_no_account">¿No tienes cuenta?</string>
+    <string name="login_register_action">Regístrate</string>
+
+    <!-- Crear Perfil Screen -->
+    <string name="create_profile_title">Crear Perfil</string>
+    <string name="step_1">PASO 1</string>
+    <string name="step_2">PASO 2</string>
+    <string name="step_3">PASO 3</string>
+    <string name="personal_info_title">Información Personal</string>
+    <string name="personal_info_subtitle">Comencemos con tus datos básicos para crear tu cuenta en EmpleoLocal.</string>
+    <string name="first_name_label">Nombres</string>
+    <string name="first_name_hint">Ej. Juan</string>
+    <string name="last_name_label">Apellidos</string>
+    <string name="last_name_hint">Ej. Pérez</string>
+    <string name="phone_label">Teléfono Celular</string>
+    <string name="phone_hint">987 654 321</string>
+    <string name="password_hint">Mínimo 8 caracteres</string>
+    <string name="ssl_security_notice">Datos cifrados con seguridad SSL</string>
+    <string name="btn_continue">Continuar</string>
+
+    <!-- Paso 2 Ubicación -->
+    <string name="location_title">Ubicación</string>
+    <string name="location_subtitle">Ayúdanos a encontrarte las mejores ofertas locales cerca de ti.</string>
+    <string name="use_current_location">Usar mi ubicación actual</string>
+    <string name="location_precision_hint">Precisión a nivel distrital en Cajamarca</string>
+    <string name="region_label">REGIÓN</string>
+    <string name="provincia_label">PROVINCIA</string>
+    <string name="distrito_label">DISTRITO</string>
+    <string name="select_distrito">Selecciona tu distrito</string>
+    <string name="search_radius_label">Radio de búsqueda</string>
+    <string name="radius_5km">5 km</string>
+    <string name="radius_1km">1 KM</string>
+    <string name="radius_15km">15 KM</string>
+    <string name="radius_30km">30 KM</string>
+
+    <!-- Paso 3 Habilidades y CV -->
+    <string name="skills_cv_title">Habilidades y CV</string>
+    <string name="skills_cv_subtitle">Selecciona tus áreas de experiencia y sube tu currículum para destacar.</string>
+    <string name="experience_areas_label">Áreas de experiencia</string>
+    <string name="documentation_label">Documentación</string>
+    <string name="upload_cv_title">Subir CV</string>
+    <string name="upload_cv_hint">Haz clic para subir tu CV (PDF, DOCX)</string>
+    <string name="recommended">RECOMENDADO</string>
+    <string name="max_file_size">Tamaño máximo de archivo: 5MB</string>
+    <string name="finish_registration">Finalizar registro</string>
+
+    <!-- Chips de experiencia -->
+    <string name="exp_mineria">Minería</string>
+    <string name="exp_agronomia">Agronomía</string>
+    <string name="exp_enfermeria">Enfermería</string>
+    <string name="exp_docencia">Docencia</string>
+    <string name="exp_contabilidad">Contabilidad</string>
+    <string name="exp_turismo">Turismo</string>
+    <string name="exp_gastronomia">Gastronomía</string>
+    <string name="exp_construccion">Construcción</string>
+    <string name="exp_mecanica">Mecánica</string>
+    <string name="exp_ventas">Ventas</string>
 </resources>
