@@ -92,7 +92,7 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Stats Cards -->
+        <!-- Stats Cards (REUTILIZANDO item_profile_stat) -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -100,6 +100,7 @@
             android:orientation="horizontal">
 
             <include
+                android:id="@+id/stat_postulaciones"
                 layout="@layout/item_profile_stat"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -110,7 +111,8 @@
                 android:layout_height="0dp" />
 
             <include
-                layout="@layout/item_profile_stat_interview"
+                android:id="@+id/stat_entrevistas"
+                layout="@layout/item_profile_stat"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -120,7 +122,8 @@
                 android:layout_height="0dp" />
 
             <include
-                layout="@layout/item_profile_stat_saved"
+                android:id="@+id/stat_guardados"
+                layout="@layout/item_profile_stat"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -152,7 +155,8 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_location"
-                        app:tint="@color/login_blue_text" />
+                        app:tint="@color/login_blue_text"
+                        android:contentDescription="@string/profile_location_radio" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -212,7 +216,8 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_security"
-                        app:tint="@color/login_blue_text" />
+                        app:tint="@color/login_blue_text"
+                        android:contentDescription="@string/profile_skills" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -284,7 +289,8 @@
                     android:layout_width="28dp"
                     android:layout_height="28dp"
                     android:src="@drawable/ic_upload"
-                    app:tint="#F44336" />
+                    app:tint="#F44336"
+                    android:contentDescription="@string/profile_cv" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -345,7 +351,8 @@
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:src="@drawable/ic_lock"
-                        app:tint="@color/login_blue_text" />
+                        app:tint="@color/login_blue_text"
+                        android:contentDescription="@string/profile_privacy" />
 
                     <TextView
                         android:layout_width="wrap_content"

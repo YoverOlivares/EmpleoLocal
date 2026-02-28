@@ -98,7 +98,7 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
-        <!-- Chips de Filtros -->
+        <!-- Chips de Filtros (REUTILIZANDO ESTILO) -->
         <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
