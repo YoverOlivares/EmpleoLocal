@@ -76,4 +76,64 @@
     <string name="exp_construccion">Construcción</string>
     <string name="exp_mecanica">Mecánica</string>
     <string name="exp_ventas">Ventas</string>
+
+    <!-- Inicio Screen -->
+    <string name="showing_jobs_in">Mostrando empleos en Cajamarca</string>
+    <string name="radio_label">Radio: </string>
+    <string name="change_location">Cambiar</string>
+    <string name="search_hint">Buscar empleos en Cajamarca...</string>
+    <string name="chip_cerca">Cerca (2km)</string>
+    <string name="chip_salud">Salud</string>
+    <string name="chip_tiempo">Tiempo completo</string>
+    <string name="offers_near_you">Ofertas cerca de ti</string>
+    <string name="nav_inicio">Inicio</string>
+    <string name="nav_mapa">Mapa</string>
+    <string name="nav_postulaciones">Postulaciones</string>
+    <string name="nav_perfil">Perfil</string>
+
+    <!-- Mapa Screen -->
+    <string name="map_title">Mapa de Empleos</string>
+    <string name="map_search_hint">Buscar en Cajamarca...</string>
+    <string name="current_location_tag">Cajamarca Centro</string>
+    <string name="selected_job_label">SELECTED JOB</string>
+    <string name="btn_aplicar">Aplicar</string>
+    <string name="jobs_found_title">28 empleos en Cajamarca Centro</string>
+    <string name="swipe_up_hint">Desliza para ver la lista completa</string>
+    <string name="view_list">Ver Lista</string>
+
+    <!-- Postulaciones Screen -->
+    <string name="title_postulaciones">Mis Postulaciones</string>
+    <string name="filter_sent">Enviadas (8)</string>
+    <string name="filter_review">En Revisión (3)</string>
+    <string name="filter_interview">Entrevista</string>
+    <string name="tab_all">Todas</string>
+    <string name="tab_active">Activas</string>
+    <string name="tab_archived">Archivadas</string>
+    <string name="status_review">En Revisión</string>
+    <string name="status_interview">Entrevista</string>
+    <string name="status_rejected">Rechazada</string>
+    <string name="step_applied">Postulado</string>
+    <string name="step_review">Revisión</string>
+    <string name="step_interview">Entrevista</string>
+    <string name="step_final">Final</string>
+    <string name="view_detail">Ver detalle</string>
+
+    <!-- Perfil Screen -->
+    <string name="title_perfil">Mi Perfil</string>
+    <string name="user_name">Carlos Pérez Quispe</string>
+    <string name="user_initials">CP</string>
+    <string name="user_role">Técnico en Minería</string>
+    <string name="user_location">Cajamarca, Cajamarca</string>
+    <string name="label_postulaciones">POSTULACIONES</string>
+    <string name="label_entrevistas">ENTREVISTAS</string>
+    <string name="label_guardados">GUARDADOS</string>
+    <string name="profile_location_radio">Mi Ubicación y Radio</string>
+    <string name="profile_skills">Mis Habilidades</string>
+    <string name="profile_cv">Mi CV</string>
+    <string name="profile_cv_file">CV_Carlos_Perez.pdf</string>
+    <string name="view_cv">Ver CV</string>
+    <string name="profile_privacy">Privacidad</string>
+    <string name="profile_visible">Perfil Visible</string>
+    <string name="profile_notifications">Notificaciones</string>
+    <string name="logout">Cerrar sesión</string>
 </resources>

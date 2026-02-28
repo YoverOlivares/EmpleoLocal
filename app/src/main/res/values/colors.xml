@@ -36,4 +36,5 @@
     <color name="login_input_stroke">#E8EDF2</color>
     <color name="login_hint">#637788</color>
     <color name="login_blue_text">#1F89E5</color>
+    <color name="blue_10_alpha">#1A1F89E5</color>
 </resources>

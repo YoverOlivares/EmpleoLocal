@@ -1,10 +1,103 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/screen_bg"
     tools:context=".activity_postulaciones">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Filtros Rápidos (Chips con Iconos) -->
+        <HorizontalScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="16dp">
+
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/filter_sent"
+                    app:chipBackgroundColor="#E3F2FD"
+                    app:chipCornerRadius="20dp"
+                    app:chipStrokeWidth="0dp"
+                    app:icon="@drawable/ic_sent" />
+
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/filter_review"
+                    app:chipBackgroundColor="#FFF3E0"
+                    app:chipCornerRadius="20dp"
+                    app:chipStrokeWidth="0dp"
+                    app:icon="@drawable/ic_search_small" />
+
+                <com.google.android.material.chip.Chip
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/filter_interview"
+                    app:chipBackgroundColor="#E8F5E9"
+                    app:chipCornerRadius="20dp"
+                    app:chipStrokeWidth="0dp"
+                    app:icon="@drawable/ic_check_circle" />
+            </LinearLayout>
+        </HorizontalScrollView>
+
+        <!-- Tabs -->
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tabs_postulaciones"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            app:tabIndicatorColor="@color/login_blue_text"
+            app:tabSelectedTextColor="@color/login_blue_text"
+            app:tabTextColor="@color/login_subtitle">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_all" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_active" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tab_archived" />
+        </com.google.android.material.tabs.TabLayout>
+
+        <!-- Lista de Postulaciones -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Card 1: En Revisión -->
+            <include layout="@layout/item_postulacion_revision" />
+
+            <!-- Card 2: Entrevista -->
+            <include layout="@layout/item_postulacion_entrevista" />
+
+            <!-- Card 3: Rechazada -->
+            <include layout="@layout/item_postulacion_rechazada" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>
