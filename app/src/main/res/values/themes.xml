@@ -1,8 +1,13 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
     <style name="Base.Theme.EmpleoLocal" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="colorPrimary">@color/blue_selected</item>
+        <item name="android:windowBackground">@color/screen_bg</item>
+
+        <!-- Referencia a los estilos de los componentes que ya están en styles.xml -->
+        <!-- toolbarStyle y bottomNavigationStyle -->
+        <item name="toolbarStyle">@style/Widget.EmpleoLocal.Toolbar</item>
+        <item name="bottomNavigationStyle">@style/Widget.EmpleoLocal.BottomNav</item>
     </style>
 
     <style name="Theme.EmpleoLocal" parent="Base.Theme.EmpleoLocal" />
