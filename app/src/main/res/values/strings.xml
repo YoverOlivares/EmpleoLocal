@@ -57,7 +57,7 @@
     <!-- Paso 3 Habilidades y CV -->
     <string name="skills_cv_title">Habilidades y CV</string>
     <string name="skills_cv_subtitle">Selecciona tus áreas de experiencia y sube tu currículum para destacar.</string>
-    <string name="experience_areas_label">Áreas de experiencia</string>
+    <string name="experience_areas_label">Areas de experiencia</string>
     <string name="documentation_label">Documentación</string>
     <string name="upload_cv_title">Subir CV</string>
     <string name="upload_cv_hint">Haz clic para subir tu CV (PDF, DOCX)</string>
@@ -145,4 +145,32 @@
     <string name="btn_save_changes">Guardar Cambios</string>
     <string name="last_updated_prefix">Actualizado hace </string>
     <string name="update">Actualizar</string>
+
+    <!-- Notificaciones Screen -->
+    <string name="notifications_title">Notificaciones</string>
+    <string name="mark_all_read">Marcar todas leídas</string>
+    <string name="tab_notifications_all">Todas</string>
+    <string name="tab_notifications_proximity">Proximidad</string>
+    <string name="tab_notifications_applications">Postulaciones</string>
+    <string name="section_unread">NO LEÍDAS</string>
+    <string name="section_read">LEÍDAS</string>
+    <string name="notif_new_offer_title">Nueva oferta a 0.8km</string>
+    <string name="notif_time_5min">Hace 5 min</string>
+    <string name="notif_5km_radio_title">2 nuevas ofertas in 5km radio</string>
+    <string name="notif_time_15min">Hace 15 min</string>
+    <string name="notif_app_viewed_title">Tu postulación fue vista</string>
+    <string name="notif_time_1h">Hace 1 hora</string>
+    <string name="notif_verified_company_title">Nueva empresa verificada (Gold Fields)</string>
+    <string name="notif_time_yesterday">Ayer, 08:15 AM</string>
+
+    <!-- Detalle Oferta Screen -->
+    <string name="job_detail_title">Detalle de Oferta</string>
+    <string name="company_api_integration">Integrado con API Ministerio de Trabajo</string>
+    <string name="job_description_label">Descripción</string>
+    <string name="job_responsibilities_label">Responsabilidades:</string>
+    <string name="job_benefits_label">Beneficios:</string>
+    <string name="job_location_label">Ubicación</string>
+    <string name="btn_aplicacion_rapida">Aplicación Rápida</string>
+    <string name="full_time">Tiempo completo</string>
+    <string name="on_site">Presencial</string>
 </resources>

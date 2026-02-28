@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E0E0E0"
-    tools:context=".mapa_empleos">
+    tools:context=".activity_mapa_empleos">
 
     <!-- Simulación del Mapa (Aquí irá Google Maps) -->
     <View
@@ -74,7 +74,8 @@
                     android:layout_width="14dp"
                     android:layout_height="14dp"
                     android:src="@drawable/ic_location"
-                    app:tint="@color/login_blue_text" />
+                    app:tint="@color/login_blue_text"
+                    android:contentDescription="@string/current_location_tag" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -155,7 +156,8 @@
                         android:layout_height="match_parent"
                         android:padding="8dp"
                         android:src="@drawable/ic_briefcase"
-                        app:tint="@color/white" />
+                        app:tint="@color/white"
+                        android:contentDescription="@string/desc_logo" />
                 </com.google.android.material.card.MaterialCardView>
             </RelativeLayout>
 
@@ -251,6 +253,7 @@
                 </LinearLayout>
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/view_list_btn_container"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -262,9 +265,9 @@
                     app:rippleColor="@color/login_blue_text" />
             </RelativeLayout>
 
-            <!-- Aquí se cargaría lista_ofertas.xml cuando se despliegue -->
-            <FrameLayout
-                android:id="@+id/list_container"
+            <!-- Aquí se cargaría activity_lista_ofertas.xml cuando se despliegue -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list_container_rv"
                 android:layout_width="match_parent"
                 android:layout_height="500dp"
                 android:layout_marginTop="16dp" />
