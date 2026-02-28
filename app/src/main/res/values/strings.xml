@@ -136,4 +136,13 @@
     <string name="profile_visible">Perfil Visible</string>
     <string name="profile_notifications">Notificaciones</string>
     <string name="logout">Cerrar sesión</string>
+
+    <!-- Editar Perfil Screen -->
+    <string name="edit_profile_title">Editar Perfil</string>
+    <string name="btn_save">Guardar</string>
+    <string name="change_profile_photo">Cambiar foto de perfil</string>
+    <string name="email_no_edit_note">El correo no puede ser modificado.</string>
+    <string name="btn_save_changes">Guardar Cambios</string>
+    <string name="last_updated_prefix">Actualizado hace </string>
+    <string name="update">Actualizar</string>
 </resources>

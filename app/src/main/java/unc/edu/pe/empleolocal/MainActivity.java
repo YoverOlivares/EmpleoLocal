@@ -24,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvToolbarTitle;
     private View flNotifications;
     private View ivEditProfile;
+    private View ivBackButton;
+    private View tvSaveButton;
     private BottomNavigationView bottomNavigation;
 
     @Override
@@ -36,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
         tvToolbarTitle = findViewById(R.id.tv_toolbar_title);
         flNotifications = findViewById(R.id.fl_notifications);
         ivEditProfile = findViewById(R.id.iv_edit_profile);
+        ivBackButton = findViewById(R.id.iv_back_button);
+        tvSaveButton = findViewById(R.id.tv_save_button);
         bottomNavigation = findViewById(R.id.bottom_navigation);
 
         // Manejo de Insets
@@ -50,23 +54,35 @@ public class MainActivity extends AppCompatActivity {
             int id = item.getItemId();
             
             if (id == R.id.nav_home) {
-                updateToolbar("EmpleoLocal", true, false);
+                updateToolbar("EmpleoLocal", true, false, false, false);
                 loadFragment(new InicioFragment());
                 return true;
             } else if (id == R.id.nav_map) {
-                updateToolbar("Mapa de Empleos", true, false);
+                updateToolbar("Mapa de Empleos", true, false, false, false);
                 loadFragment(new MapaFragment());
                 return true;
             } else if (id == R.id.nav_apply) {
-                updateToolbar("Mis Postulaciones", true, false);
+                updateToolbar("Mis Postulaciones", true, false, false, false);
                 loadFragment(new PostulacionesFragment());
                 return true;
             } else if (id == R.id.nav_profile) {
-                updateToolbar("Mi Perfil", false, true);
+                updateToolbar("Mi Perfil", false, true, false, false);
                 loadFragment(new PerfilFragment());
                 return true;
             }
             return false;
+        });
+
+        // Clic en el lápiz para editar perfil
+        ivEditProfile.setOnClickListener(v -> {
+            updateToolbar("Editar Perfil", false, false, true, true);
+            loadFragment(new EditarPerfilFragment());
+        });
+
+        // Clic en botón atrás
+        ivBackButton.setOnClickListener(v -> {
+            // Regresar a la pestaña de perfil
+            bottomNavigation.setSelectedItemId(R.id.nav_profile);
         });
 
         // Cargar pantalla de inicio por defecto
@@ -75,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void updateToolbar(String title, boolean showNotifications, boolean showEdit) {
+    private void updateToolbar(String title, boolean showNotifications, boolean showEdit, boolean showBack, boolean showSave) {
         if (tvToolbarTitle != null) {
             tvToolbarTitle.setText(title);
         }
@@ -84,6 +100,12 @@ public class MainActivity extends AppCompatActivity {
         }
         if (ivEditProfile != null) {
             ivEditProfile.setVisibility(showEdit ? View.VISIBLE : View.GONE);
+        }
+        if (ivBackButton != null) {
+            ivBackButton.setVisibility(showBack ? View.VISIBLE : View.GONE);
+        }
+        if (tvSaveButton != null) {
+            tvSaveButton.setVisibility(showSave ? View.VISIBLE : View.GONE);
         }
     }
 
@@ -124,6 +146,14 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             return inflater.inflate(R.layout.activity_perfil, container, false);
+        }
+    }
+
+    public static class EditarPerfilFragment extends Fragment {
+        @Nullable
+        @Override
+        public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+            return inflater.inflate(R.layout.activity_editar_perfil, container, false);
         }
     }
 }

@@ -5,6 +5,6 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity_perfil_empresa">
+    tools:context=".perfil_empresa">
 
 </androidx.constraintlayout.widget.ConstraintLayout>
