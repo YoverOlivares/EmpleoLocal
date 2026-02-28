@@ -89,13 +89,13 @@
             android:padding="16dp">
 
             <!-- Card 1: En Revisión -->
-            <include layout="@layout/item_postulacion_revision" />
+            <include android:id="@+id/item_revision" layout="@layout/item_postulacion_revision" />
 
             <!-- Card 2: Entrevista -->
-            <include layout="@layout/item_postulacion_entrevista" />
+            <include android:id="@+id/item_entrevista" layout="@layout/item_postulacion_entrevista" />
 
             <!-- Card 3: Rechazada -->
-            <include layout="@layout/item_postulacion_rechazada" />
+            <include android:id="@+id/item_rechazada" layout="@layout/item_postulacion_rechazada" />
 
         </LinearLayout>
 

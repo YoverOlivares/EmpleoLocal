@@ -20,13 +20,17 @@
 
             <!-- Header Card -->
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_company_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="24dp"
                 app:cardElevation="2dp"
                 app:strokeColor="#E8EDF2"
-                app:strokeWidth="1dp">
+                app:strokeWidth="1dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?attr/selectableItemBackground">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -75,7 +79,8 @@
                                 android:layout_width="16dp"
                                 android:layout_height="16dp"
                                 android:layout_marginStart="4dp"
-                                android:src="@drawable/ic_check_circle" />
+                                android:src="@drawable/ic_check_circle"
+                                android:contentDescription="@string/company_verified" />
                         </LinearLayout>
 
                         <LinearLayout
@@ -88,7 +93,8 @@
                             <ImageView
                                 android:layout_width="14dp"
                                 android:layout_height="14dp"
-                                android:src="@drawable/ic_star" />
+                                android:src="@drawable/ic_star"
+                                android:contentDescription="Calificación" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -137,7 +143,8 @@
                         android:layout_width="14dp"
                         android:layout_height="14dp"
                         android:src="@drawable/ic_location"
-                        app:tint="@color/login_subtitle" />
+                        app:tint="@color/login_subtitle"
+                        android:contentDescription="Distancia" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -159,7 +166,8 @@
                         android:layout_width="14dp"
                         android:layout_height="14dp"
                         android:src="@drawable/ic_sent"
-                        app:tint="@color/login_subtitle" />
+                        app:tint="@color/login_subtitle"
+                        android:contentDescription="Salario" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -187,7 +195,8 @@
                         android:layout_width="14dp"
                         android:layout_height="14dp"
                         android:src="@drawable/ic_lock"
-                        app:tint="@color/login_subtitle" />
+                        app:tint="@color/login_subtitle"
+                        android:contentDescription="Tipo de empleo" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -209,7 +218,8 @@
                         android:layout_width="14dp"
                         android:layout_height="14dp"
                         android:src="@drawable/ic_briefcase"
-                        app:tint="@color/login_subtitle" />
+                        app:tint="@color/login_subtitle"
+                        android:contentDescription="Modalidad" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -304,7 +314,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/ic_launcher_background" />
+                    android:src="@drawable/ic_launcher_background"
+                    android:contentDescription="Mapa de ubicación" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -318,7 +329,8 @@
                         android:layout_width="16dp"
                         android:layout_height="16dp"
                         android:src="@drawable/ic_location"
-                        app:tint="@color/login_subtitle" />
+                        app:tint="@color/login_subtitle"
+                        android:contentDescription="Ubicación" />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

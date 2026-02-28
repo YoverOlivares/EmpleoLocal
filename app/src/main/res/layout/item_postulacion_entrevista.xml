@@ -2,6 +2,7 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/card_entrevista"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="16dp"
@@ -207,13 +208,16 @@
         </LinearLayout>
 
         <TextView
+            android:id="@+id/btn_ver_detalle_entrevista"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginTop="16dp"
             android:text="@string/view_detail"
             android:textColor="@color/login_blue_text"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:clickable="true"
+            android:focusable="true"/>
 
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

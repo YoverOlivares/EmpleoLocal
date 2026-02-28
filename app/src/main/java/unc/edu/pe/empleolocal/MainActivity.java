@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -22,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -114,6 +114,23 @@ public class MainActivity extends AppCompatActivity {
         loadFragment(new DetalleOfertaFragment());
     }
 
+    public void openCompanyProfile() {
+        updateToolbar("Perfil de Empresa", false, false, true, false, false, false);
+        loadFragment(new PerfilEmpresaFragment());
+    }
+
+    public void openTracking() {
+        updateToolbar("Seguimiento", false, false, true, false, false, false);
+        deselectBottomNav();
+        loadFragment(new SeguimientoFragment());
+    }
+
+    public void openFilters() {
+        updateToolbar("Filtrar Ofertas", false, false, true, false, false, false);
+        deselectBottomNav();
+        loadFragment(new FiltrarOfertasFragment());
+    }
+
     private void deselectBottomNav() {
         bottomNavigation.getMenu().setGroupCheckable(0, false, true);
         for (int i = 0; i < bottomNavigation.getMenu().size(); i++) {
@@ -142,48 +159,71 @@ public class MainActivity extends AppCompatActivity {
     public static class InicioFragment extends Fragment {
         @Nullable @Override public View onCreateView(@NonNull LayoutInflater i, @Nullable ViewGroup c, @Nullable Bundle s) {
             View view = i.inflate(R.layout.activity_inicio, c, false);
+            
+            // Botón "Cambiar" ubicación
+            view.findViewById(R.id.tv_change).setOnClickListener(v -> {
+                showLocationDialog();
+            });
+
             RecyclerView rv = view.findViewById(R.id.rv_inicio_ofertas);
             rv.setLayoutManager(new LinearLayoutManager(getContext()));
             rv.setAdapter(new SimpleOfertaAdapter((MainActivity) getActivity()));
             return view;
+        }
+
+        private void showLocationDialog() {
+            BottomSheetDialog dialog = new BottomSheetDialog(requireContext());
+            View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.layout_location_selection, null);
+            dialog.setContentView(dialogView);
+            
+            // Botón Aplicar dentro de la tarjeta
+            dialogView.findViewById(R.id.btn_apply_location).setOnClickListener(v -> {
+                dialog.dismiss();
+            });
+            
+            dialog.show();
         }
     }
 
     public static class MapaFragment extends Fragment {
         @Nullable @Override public View onCreateView(@NonNull LayoutInflater i, @Nullable ViewGroup c, @Nullable Bundle s) {
             View view = i.inflate(R.layout.activity_mapa_empleos, c, false);
-            
-            // Configurar BottomSheet
             View bottomSheet = view.findViewById(R.id.bottom_sheet);
             BottomSheetBehavior<View> behavior = BottomSheetBehavior.from(bottomSheet);
-            
-            // Botón "Ver Lista" para expandir
-            view.findViewById(R.id.bottom_sheet).findViewById(R.id.view_list_btn_container).setOnClickListener(v -> {
+            view.findViewById(R.id.view_list_btn_container).setOnClickListener(v -> {
                 behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
             });
-
-            // Cargar lista dentro del BottomSheet
             RecyclerView rv = view.findViewById(R.id.list_container_rv);
-            if (rv == null) {
-                // Si no existe, lo buscamos por ID o lo creamos dinámicamente si fuera necesario
-                // Pero lo ideal es que esté en el XML. Vamos a asegurar que esté.
-            } else {
+            if (rv != null) {
                 rv.setLayoutManager(new LinearLayoutManager(getContext()));
                 rv.setAdapter(new SimpleOfertaAdapter((MainActivity) getActivity()));
             }
-
-            // Hacer que la card del mapa abra el detalle
             view.findViewById(R.id.card_selected_job).setOnClickListener(v -> {
                 ((MainActivity) getActivity()).openJobDetail();
             });
-            
+            view.findViewById(R.id.fab_my_location).setOnClickListener(v -> {
+                ((MainActivity) getActivity()).openFilters();
+            });
+            view.findViewById(R.id.fab_filter).setOnClickListener(v -> {
+                ((MainActivity) getActivity()).openFilters();
+            });
             return view;
         }
     }
 
     public static class PostulacionesFragment extends Fragment {
         @Nullable @Override public View onCreateView(@NonNull LayoutInflater i, @Nullable ViewGroup c, @Nullable Bundle s) {
-            return i.inflate(R.layout.activity_postulaciones, c, false);
+            View view = i.inflate(R.layout.activity_postulaciones, c, false);
+            view.findViewById(R.id.item_revision).findViewById(R.id.btn_ver_detalle).setOnClickListener(v -> {
+                ((MainActivity) getActivity()).openTracking();
+            });
+            view.findViewById(R.id.item_entrevista).findViewById(R.id.btn_ver_detalle_entrevista).setOnClickListener(v -> {
+                ((MainActivity) getActivity()).openTracking();
+            });
+            view.findViewById(R.id.item_rechazada).findViewById(R.id.btn_ver_detalle_rechazada).setOnClickListener(v -> {
+                ((MainActivity) getActivity()).openTracking();
+            });
+            return view;
         }
     }
 
@@ -207,7 +247,30 @@ public class MainActivity extends AppCompatActivity {
 
     public static class DetalleOfertaFragment extends Fragment {
         @Nullable @Override public View onCreateView(@NonNull LayoutInflater i, @Nullable ViewGroup c, @Nullable Bundle s) {
-            return i.inflate(R.layout.activity_detalle_oferta, c, false);
+            View view = i.inflate(R.layout.activity_detalle_oferta, i.inflate(R.layout.activity_detalle_oferta, c, false) instanceof ViewGroup ? (ViewGroup) i.inflate(R.layout.activity_detalle_oferta, c, false) : c, false);
+            view.findViewById(R.id.cv_company_header).setOnClickListener(v -> {
+                ((MainActivity) getActivity()).openCompanyProfile();
+            });
+            return view;
+        }
+        @Override public View getView() { return super.getView(); }
+    }
+
+    public static class PerfilEmpresaFragment extends Fragment {
+        @Nullable @Override public View onCreateView(@NonNull LayoutInflater i, @Nullable ViewGroup c, @Nullable Bundle s) {
+            return i.inflate(R.layout.activity_perfil_empresa, c, false);
+        }
+    }
+
+    public static class SeguimientoFragment extends Fragment {
+        @Nullable @Override public View onCreateView(@NonNull LayoutInflater i, @Nullable ViewGroup c, @Nullable Bundle s) {
+            return i.inflate(R.layout.activity_seguimiento_postulacion, c, false);
+        }
+    }
+
+    public static class FiltrarOfertasFragment extends Fragment {
+        @Nullable @Override public View onCreateView(@NonNull LayoutInflater i, @Nullable ViewGroup c, @Nullable Bundle s) {
+            return i.inflate(R.layout.activity_filtrar_ofertas, c, false);
         }
     }
 
@@ -221,7 +284,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         @Override public void onBindViewHolder(@NonNull ViewHolder h, int pos) {
-            // ASIGNAR TEXTOS REALES PARA QUE SE VEAN
             if (pos == 0) {
                 h.tvJobTitle.setText("Técnico de Operaciones Mineras");
                 h.tvCompanyName.setText("Yanacocha");
@@ -241,7 +303,6 @@ public class MainActivity extends AppCompatActivity {
                 h.tvAddress.setText("Centro de Cajamarca");
                 h.tvSalary.setText("S/. 2,500/mes");
             }
-
             h.itemView.setOnClickListener(v -> activity.openJobDetail());
         }
 
