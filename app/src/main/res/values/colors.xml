@@ -2,4 +2,28 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Seleccionado (click) -->
+    <color name="blue_selected">#1F89E5</color>
+
+    <!-- Fondo pantallas/contenedor -->
+    <color name="screen_bg">#F6F7F8</color>
+
+    <!-- AppBar -->
+    <color name="appbar_bg">#FFFFFF</color>
+    <color name="appbar_title">#000000</color>
+
+    <!-- BottomBar -->
+    <color name="bottom_bg">#FFFFFF</color>
+    <color name="bottom_unselected">#9AA3AF</color>
+
+    <!-- Ofertas Screen -->
+    <color name="color_primary_green">#43A047</color>
+    <color name="text_title">#001C39</color>
+    <color name="text_subtitle">#677489</color>
+    <color name="text_details">#8A94A6</color>
+    <color name="divider_color">#E0E0E0</color>
+
+    <!-- Bienvenida Screen -->
+    <color name="blue_bg">#1F89E5</color>
 </resources>

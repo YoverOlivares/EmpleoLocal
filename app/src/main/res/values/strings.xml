@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">EmpleoLocal</string>
+    <string name="btn_aplicar_rapido">Aplicar rápido</string>
+    <string name="desc_check">Empresa verificada</string>
+    <string name="desc_location">Ubicación</string>
+    <string name="desc_logo">Logo de la empresa</string>
+    <string name="divider_bullet">·</string>
+
+    <!-- Bienvenida Screen -->
+    <string name="welcome_subtitle">Tu empleo más cercano</string>
+    <string name="btn_iniciar_sesion">Iniciar Sesión</string>
+    <string name="btn_registrarse">Registrarse</string>
 </resources>
