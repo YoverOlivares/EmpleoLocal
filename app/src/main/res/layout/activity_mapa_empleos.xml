@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E0E0E0"
-    tools:context=".mapa_empleos">
+    tools:context=".ui.mapa.MapaActivity">
 
     <!-- Simulación del Mapa (Aquí irá Google Maps) -->
     <View

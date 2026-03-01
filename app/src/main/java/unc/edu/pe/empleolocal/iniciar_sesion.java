@@ -13,6 +13,9 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.button.MaterialButton;
 
+import unc.edu.pe.empleolocal.ui.main.MainActivity;
+import unc.edu.pe.empleolocal.ui.registro.RegistroPaso1Activity;
+
 public class iniciar_sesion extends AppCompatActivity {
 
     @Override
@@ -36,7 +39,7 @@ public class iniciar_sesion extends AppCompatActivity {
         tvRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(iniciar_sesion.this, registro_paso_1.class);
+                Intent intent = new Intent(iniciar_sesion.this, RegistroPaso1Activity.class);
                 startActivity(intent);
             }
         });
@@ -44,7 +47,7 @@ public class iniciar_sesion extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Por ahora redirigimos a MainActivity al iniciar sesión
+                // Por ahora redirigimos a MainActivity2 al iniciar sesión
                 Intent intent = new Intent(iniciar_sesion.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);

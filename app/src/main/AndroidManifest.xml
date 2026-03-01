@@ -15,7 +15,7 @@
             android:name=".editar_perfil"
             android:exported="false" />
         <activity
-            android:name=".lista_ofertas"
+            android:name=".ui.lista.ListaOfertasActivity"
             android:exported="false" />
         <activity
             android:name=".seguimiento_postulacion"
@@ -27,40 +27,40 @@
             android:name=".notificaciones"
             android:exported="false" />
         <activity
-            android:name=".empleos_guardados"
+            android:name=".ui.guardadas.EmpleosGuardadosActivity"
             android:exported="false" />
         <activity
             android:name=".perfil_empresa"
             android:exported="false" />
         <activity
-            android:name=".detalle_oferta"
+            android:name=".ui.detalle.DetalleOfertaActivity"
             android:exported="false" />
         <activity
             android:name=".perfil"
             android:exported="false" />
         <activity
-            android:name=".postulaciones"
+            android:name=".ui.postulaciones.PostulacionesActivity"
             android:exported="false" />
         <activity
-            android:name=".mapa_empleos"
+            android:name=".ui.mapa.MapaActivity"
             android:exported="false" />
         <activity
             android:name=".inicio"
             android:exported="false" />
         <activity
-            android:name=".registro_paso_3"
+            android:name=".ui.registro.RegistroPaso3Activity"
             android:exported="false" />
         <activity
-            android:name=".registro_paso_2"
+            android:name=".ui.registro.RegistroPaso2Activity"
             android:exported="false" />
         <activity
-            android:name=".registro_paso_1"
+            android:name=".ui.registro.RegistroPaso1Activity"
             android:exported="false" />
         <activity
             android:name=".iniciar_sesion"
             android:exported="true" />
         <activity
-            android:name=".bienvenida"
+            android:name=".ui.auth.BienvenidaActivity"
             android:exported="true">
              <intent-filter>
              <action android:name="android.intent.action.MAIN" />
@@ -68,7 +68,7 @@
              </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.main.MainActivity"
             android:exported="false"/>
     </application>
 

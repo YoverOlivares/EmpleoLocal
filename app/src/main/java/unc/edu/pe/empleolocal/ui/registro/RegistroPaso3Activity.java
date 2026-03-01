@@ -1,4 +1,4 @@
-package unc.edu.pe.empleolocal;
+package unc.edu.pe.empleolocal.ui.registro;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +13,10 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.button.MaterialButton;
 
-public class registro_paso_3 extends AppCompatActivity {
+import unc.edu.pe.empleolocal.R;
+import unc.edu.pe.empleolocal.ui.main.MainActivity;
+
+public class RegistroPaso3Activity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +48,7 @@ public class registro_paso_3 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // Finalizar registro y llevar a la pantalla principal
-                Intent intent = new Intent(registro_paso_3.this, MainActivity.class);
+                Intent intent = new Intent(RegistroPaso3Activity.this, MainActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
             }

@@ -1,4 +1,4 @@
-package unc.edu.pe.empleolocal;
+package unc.edu.pe.empleolocal.ui.detalle;
 
 import android.os.Bundle;
 
@@ -8,7 +8,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class detalle_oferta extends AppCompatActivity {
+import unc.edu.pe.empleolocal.R;
+
+public class DetalleOfertaActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,4 +1,4 @@
-package unc.edu.pe.empleolocal;
+package unc.edu.pe.empleolocal.ui.auth;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +12,11 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.button.MaterialButton;
 
-public class bienvenida extends AppCompatActivity {
+import unc.edu.pe.empleolocal.R;
+import unc.edu.pe.empleolocal.iniciar_sesion;
+import unc.edu.pe.empleolocal.ui.registro.RegistroPaso1Activity;
+
+public class BienvenidaActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +36,7 @@ public class bienvenida extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(bienvenida.this, iniciar_sesion.class);
+                Intent intent = new Intent(BienvenidaActivity.this, iniciar_sesion.class);
                 startActivity(intent);
             }
         });
@@ -40,7 +44,7 @@ public class bienvenida extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(bienvenida.this, registro_paso_1.class);
+                Intent intent = new Intent(BienvenidaActivity.this, RegistroPaso1Activity.class);
                 startActivity(intent);
             }
         });

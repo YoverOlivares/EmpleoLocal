@@ -1,4 +1,4 @@
-package unc.edu.pe.empleolocal;
+package unc.edu.pe.empleolocal.ui.registro;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +13,9 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.google.android.material.button.MaterialButton;
 
-public class registro_paso_2 extends AppCompatActivity {
+import unc.edu.pe.empleolocal.R;
+
+public class RegistroPaso2Activity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +46,7 @@ public class registro_paso_2 extends AppCompatActivity {
         btnContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(registro_paso_2.this, registro_paso_3.class);
+                Intent intent = new Intent(RegistroPaso2Activity.this, RegistroPaso3Activity.class);
                 startActivity(intent);
             }
         });

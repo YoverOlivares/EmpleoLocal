@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/login_bg"
     android:fitsSystemWindows="true"
-    tools:context=".registro_paso_2">
+    tools:context=".ui.registro.RegistroPaso2Activity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
