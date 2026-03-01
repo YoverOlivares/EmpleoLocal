@@ -13,7 +13,6 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.button.MaterialButton;
 
 import unc.edu.pe.empleolocal.R;
-import unc.edu.pe.empleolocal.iniciar_sesion;
 import unc.edu.pe.empleolocal.ui.registro.RegistroPaso1Activity;
 
 public class BienvenidaActivity extends AppCompatActivity {

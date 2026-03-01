@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/login_bg"
-    tools:context=".iniciar_sesion">
+    tools:context=".ui.auth.iniciar_sesion">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -104,6 +104,7 @@
                         app:startIconDrawable="@drawable/ic_email">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_email"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/login_email_hint"
@@ -142,6 +143,7 @@
                         app:startIconDrawable="@drawable/ic_lock">
 
                         <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/et_password"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:inputType="textPassword" />
@@ -211,5 +213,15 @@
             android:textColor="@color/login_blue_text"
             android:textStyle="bold" />
     </LinearLayout>
+
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
