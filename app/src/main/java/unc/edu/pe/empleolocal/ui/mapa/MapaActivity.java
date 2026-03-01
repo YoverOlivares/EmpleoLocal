@@ -14,15 +14,18 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import unc.edu.pe.empleolocal.R;
+import unc.edu.pe.empleolocal.databinding.ActivityMapaEmpleosBinding;
 
 public class MapaActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private ActivityMapaEmpleosBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mapa_empleos);
+        binding = ActivityMapaEmpleosBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -32,7 +35,7 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
         // Configurar el botón de mi ubicación (simulado por ahora)
-        findViewById(R.id.fab_my_location).setOnClickListener(v -> {
+        binding.fabMyLocation.setOnClickListener(v -> {
             if (mMap != null) {
                 LatLng cajamarca = new LatLng(-7.1561, -78.5147);
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(cajamarca, 15));
@@ -51,13 +54,13 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         // Configurar el listener para los marcadores si es necesario
         mMap.setOnMarkerClickListener(marker -> {
-            findViewById(R.id.card_selected_job).setVisibility(View.VISIBLE);
+            binding.cardSelectedJob.setVisibility(View.VISIBLE);
             return false;
         });
 
         // Ocultar card al tocar el mapa
         mMap.setOnMapClickListener(latLng -> {
-            findViewById(R.id.card_selected_job).setVisibility(View.GONE);
+            binding.cardSelectedJob.setVisibility(View.GONE);
         });
     }
 }

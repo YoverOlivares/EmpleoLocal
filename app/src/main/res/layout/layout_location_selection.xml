@@ -63,16 +63,18 @@
                     android:textStyle="bold" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_region"
                     style="@style/LoginInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_region"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:enabled="false"
-                        android:text="Cajamarca" />
+                        android:hint="Región" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
@@ -92,16 +94,18 @@
                     android:textStyle="bold" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_provincia"
                     style="@style/LoginInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/et_provincia"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:enabled="false"
-                        android:text="Cajamarca" />
+                        android:hint="Provincia" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
         </LinearLayout>
@@ -116,19 +120,18 @@
             android:textStyle="bold" />
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+            android:id="@+id/til_distrito"
+            style="@style/LoginInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:boxStrokeColor="#D1E3F5"
-            app:hintEnabled="false"
-            app:shapeAppearanceOverlay="@style/ShapeAppearance.LargeComponent.Rounded">
+            android:layout_marginTop="8dp">
 
-            <AutoCompleteTextView
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_distrito"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/select_distrito"
-                android:inputType="none" />
+                android:enabled="false"
+                android:hint="Distrito" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <RelativeLayout
@@ -145,6 +148,7 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tv_radius_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -159,6 +163,7 @@
         </RelativeLayout>
 
         <com.google.android.material.slider.Slider
+            android:id="@+id/slider_radius"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -198,19 +203,6 @@
                 android:textColor="@color/login_subtitle"
                 android:textSize="10sp" />
         </RelativeLayout>
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_apply_location"
-            android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:layout_marginTop="32dp"
-            android:text="Aplicar"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:backgroundTint="@color/login_blue_text"
-            app:cornerRadius="16dp" />
 
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

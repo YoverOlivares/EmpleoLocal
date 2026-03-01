@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -17,49 +16,38 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
 import unc.edu.pe.empleolocal.R;
+import unc.edu.pe.empleolocal.databinding.ActivityMainBinding;
+import unc.edu.pe.empleolocal.databinding.ActivityInicioBinding;
+import unc.edu.pe.empleolocal.databinding.ActivityMapaEmpleosBinding;
+import unc.edu.pe.empleolocal.databinding.ActivityPostulacionesBinding;
+import unc.edu.pe.empleolocal.databinding.ActivityDetalleOfertaBinding;
+import unc.edu.pe.empleolocal.databinding.ItemOfertaBinding;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView tvToolbarTitle;
-    private View flNotifications;
-    private View ivEditProfile;
-    private View ivBackButton;
-    private View tvSaveButton;
-    private View tvMarkReadButton;
-    private View ivBookmark;
-    private BottomNavigationView bottomNavigation;
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
-
-        // Inicializar vistas
-        tvToolbarTitle = findViewById(R.id.tv_toolbar_title);
-        flNotifications = findViewById(R.id.fl_notifications);
-        ivEditProfile = findViewById(R.id.iv_edit_profile);
-        ivBackButton = findViewById(R.id.iv_back_button);
-        tvSaveButton = findViewById(R.id.tv_save_button);
-        tvMarkReadButton = findViewById(R.id.tv_mark_read_button);
-        ivBookmark = findViewById(R.id.iv_bookmark);
-        bottomNavigation = findViewById(R.id.bottom_navigation);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         // Manejo de Insets
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main_root), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(binding.mainRoot, (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
         // Configurar navegación
-        bottomNavigation.setOnItemSelectedListener(item -> {
-            bottomNavigation.getMenu().setGroupCheckable(0, true, true);
+        binding.bottomNavigation.setOnItemSelectedListener(item -> {
+            binding.bottomNavigation.getMenu().setGroupCheckable(0, true, true);
             int id = item.getItemId();
             
             if (id == R.id.nav_home) {
@@ -83,28 +71,28 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Clic en la campana de notificaciones
-        flNotifications.setOnClickListener(v -> {
+        binding.flNotifications.setOnClickListener(v -> {
             updateToolbar("Notificaciones", false, false, true, false, true, false);
             deselectBottomNav();
             loadFragment(new NotificacionesFragment());
         });
 
         // Clic en el lápiz para editar perfil
-        ivEditProfile.setOnClickListener(v -> {
+        binding.ivEditProfile.setOnClickListener(v -> {
             updateToolbar("Editar Perfil", false, false, true, true, false, false);
             deselectBottomNav();
             loadFragment(new EditarPerfilFragment());
         });
 
         // Clic en botón atrás
-        ivBackButton.setOnClickListener(v -> {
-            bottomNavigation.getMenu().setGroupCheckable(0, true, true);
-            bottomNavigation.setSelectedItemId(bottomNavigation.getSelectedItemId());
+        binding.ivBackButton.setOnClickListener(v -> {
+            binding.bottomNavigation.getMenu().setGroupCheckable(0, true, true);
+            binding.bottomNavigation.setSelectedItemId(binding.bottomNavigation.getSelectedItemId());
         });
 
         // Cargar pantalla de inicio por defecto
         if (savedInstanceState == null) {
-            bottomNavigation.setSelectedItemId(R.id.nav_home);
+            binding.bottomNavigation.setSelectedItemId(R.id.nav_home);
         }
     }
 
@@ -132,20 +120,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void deselectBottomNav() {
-        bottomNavigation.getMenu().setGroupCheckable(0, false, true);
-        for (int i = 0; i < bottomNavigation.getMenu().size(); i++) {
-            bottomNavigation.getMenu().getItem(i).setChecked(false);
+        binding.bottomNavigation.getMenu().setGroupCheckable(0, false, true);
+        for (int i = 0; i < binding.bottomNavigation.getMenu().size(); i++) {
+            binding.bottomNavigation.getMenu().getItem(i).setChecked(false);
         }
     }
 
     private void updateToolbar(String title, boolean showNotif, boolean showEdit, boolean showBack, boolean showSave, boolean showMarkRead, boolean showBookmark) {
-        if (tvToolbarTitle != null) tvToolbarTitle.setText(title);
-        if (flNotifications != null) flNotifications.setVisibility(showNotif ? View.VISIBLE : View.GONE);
-        if (ivEditProfile != null) ivEditProfile.setVisibility(showEdit ? View.VISIBLE : View.GONE);
-        if (ivBackButton != null) ivBackButton.setVisibility(showBack ? View.VISIBLE : View.GONE);
-        if (tvSaveButton != null) tvSaveButton.setVisibility(showSave ? View.VISIBLE : View.GONE);
-        if (tvMarkReadButton != null) tvMarkReadButton.setVisibility(showMarkRead ? View.VISIBLE : View.GONE);
-        if (ivBookmark != null) ivBookmark.setVisibility(showBookmark ? View.VISIBLE : View.GONE);
+        binding.tvToolbarTitle.setText(title);
+        binding.flNotifications.setVisibility(showNotif ? View.VISIBLE : View.GONE);
+        binding.ivEditProfile.setVisibility(showEdit ? View.VISIBLE : View.GONE);
+        binding.ivBackButton.setVisibility(showBack ? View.VISIBLE : View.GONE);
+        binding.tvSaveButton.setVisibility(showSave ? View.VISIBLE : View.GONE);
+        binding.tvMarkReadButton.setVisibility(showMarkRead ? View.VISIBLE : View.GONE);
+        binding.ivBookmark.setVisibility(showBookmark ? View.VISIBLE : View.GONE);
     }
 
     private void loadFragment(Fragment fragment) {
@@ -157,73 +145,69 @@ public class MainActivity extends AppCompatActivity {
     // --- FRAGMENTS ---
 
     public static class InicioFragment extends Fragment {
+        private ActivityInicioBinding b;
         @Nullable @Override public View onCreateView(@NonNull LayoutInflater i, @Nullable ViewGroup c, @Nullable Bundle s) {
-            View view = i.inflate(R.layout.activity_inicio, c, false);
+            b = ActivityInicioBinding.inflate(i, c, false);
             
-            // Botón "Cambiar" ubicación
-            view.findViewById(R.id.tv_change).setOnClickListener(v -> {
-                showLocationDialog();
-            });
+            b.tvChange.setOnClickListener(v -> showLocationDialog());
 
-            RecyclerView rv = view.findViewById(R.id.rv_inicio_ofertas);
-            rv.setLayoutManager(new LinearLayoutManager(getContext()));
-            rv.setAdapter(new SimpleOfertaAdapter((MainActivity) getActivity()));
-            return view;
+            b.rvInicioOfertas.setLayoutManager(new LinearLayoutManager(getContext()));
+            b.rvInicioOfertas.setAdapter(new SimpleOfertaAdapter((MainActivity) getActivity()));
+            return b.getRoot();
         }
 
         private void showLocationDialog() {
             BottomSheetDialog dialog = new BottomSheetDialog(requireContext());
             View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.layout_location_selection, null);
             dialog.setContentView(dialogView);
-            
-            // Botón Aplicar dentro de la tarjeta
-            dialogView.findViewById(R.id.btn_apply_location).setOnClickListener(v -> {
-                dialog.dismiss();
-            });
-            
             dialog.show();
         }
     }
 
     public static class MapaFragment extends Fragment {
+        private ActivityMapaEmpleosBinding b;
         @Nullable @Override public View onCreateView(@NonNull LayoutInflater i, @Nullable ViewGroup c, @Nullable Bundle s) {
-            View view = i.inflate(R.layout.activity_mapa_empleos, c, false);
-            View bottomSheet = view.findViewById(R.id.bottom_sheet);
-            BottomSheetBehavior<View> behavior = BottomSheetBehavior.from(bottomSheet);
-            view.findViewById(R.id.view_list_btn_container).setOnClickListener(v -> {
+            b = ActivityMapaEmpleosBinding.inflate(i, c, false);
+            BottomSheetBehavior<View> behavior = BottomSheetBehavior.from(b.bottomSheet);
+            b.viewListBtnContainer.setOnClickListener(v -> {
                 behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
             });
-            RecyclerView rv = view.findViewById(R.id.list_container_rv);
-            if (rv != null) {
-                rv.setLayoutManager(new LinearLayoutManager(getContext()));
-                rv.setAdapter(new SimpleOfertaAdapter((MainActivity) getActivity()));
+            if (b.listContainerRv != null) {
+                b.listContainerRv.setLayoutManager(new LinearLayoutManager(getContext()));
+                b.listContainerRv.setAdapter(new SimpleOfertaAdapter((MainActivity) getActivity()));
             }
-            view.findViewById(R.id.card_selected_job).setOnClickListener(v -> {
+            b.cardSelectedJob.setOnClickListener(v -> {
                 ((MainActivity) getActivity()).openJobDetail();
             });
-            view.findViewById(R.id.fab_my_location).setOnClickListener(v -> {
+            b.fabMyLocation.setOnClickListener(v -> {
                 ((MainActivity) getActivity()).openFilters();
             });
-            view.findViewById(R.id.fab_filter).setOnClickListener(v -> {
+            b.fabFilter.setOnClickListener(v -> {
                 ((MainActivity) getActivity()).openFilters();
             });
-            return view;
+            return b.getRoot();
         }
     }
 
     public static class PostulacionesFragment extends Fragment {
+        private ActivityPostulacionesBinding b;
         @Nullable @Override public View onCreateView(@NonNull LayoutInflater i, @Nullable ViewGroup c, @Nullable Bundle s) {
-            View view = i.inflate(R.layout.activity_postulaciones, c, false);
-            view.findViewById(R.id.item_revision).findViewById(R.id.btn_ver_detalle).setOnClickListener(v -> {
+            b = ActivityPostulacionesBinding.inflate(i, c, false);
+            
+            // Acceso mediante binding a los elementos de los layouts incluidos
+            b.itemRevision.btnVerDetalle.setOnClickListener(v -> {
                 ((MainActivity) getActivity()).openTracking();
             });
-            view.findViewById(R.id.item_entrevista).findViewById(R.id.btn_ver_detalle_entrevista).setOnClickListener(v -> {
+            
+            b.itemEntrevista.btnVerDetalleEntrevista.setOnClickListener(v -> {
                 ((MainActivity) getActivity()).openTracking();
             });
-            view.findViewById(R.id.item_rechazada).findViewById(R.id.btn_ver_detalle_rechazada).setOnClickListener(v -> {
+            
+            b.itemRechazada.btnVerDetalleRechazada.setOnClickListener(v -> {
                 ((MainActivity) getActivity()).openTracking();
             });
-            return view;
+
+            return b.getRoot();
         }
     }
 
@@ -246,14 +230,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public static class DetalleOfertaFragment extends Fragment {
+        private ActivityDetalleOfertaBinding b;
         @Nullable @Override public View onCreateView(@NonNull LayoutInflater i, @Nullable ViewGroup c, @Nullable Bundle s) {
-            View view = i.inflate(R.layout.activity_detalle_oferta, i.inflate(R.layout.activity_detalle_oferta, c, false) instanceof ViewGroup ? (ViewGroup) i.inflate(R.layout.activity_detalle_oferta, c, false) : c, false);
-            view.findViewById(R.id.cv_company_header).setOnClickListener(v -> {
+            b = ActivityDetalleOfertaBinding.inflate(i, c, false);
+            b.cvCompanyHeader.setOnClickListener(v -> {
                 ((MainActivity) getActivity()).openCompanyProfile();
             });
-            return view;
+            return b.getRoot();
         }
-        @Override public View getView() { return super.getView(); }
     }
 
     public static class PerfilEmpresaFragment extends Fragment {
@@ -280,28 +264,28 @@ public class MainActivity extends AppCompatActivity {
         public SimpleOfertaAdapter(MainActivity activity) { this.activity = activity; }
 
         @NonNull @Override public ViewHolder onCreateViewHolder(@NonNull ViewGroup p, int t) {
-            return new ViewHolder(LayoutInflater.from(p.getContext()).inflate(R.layout.item_oferta, p, false));
+            return new ViewHolder(ItemOfertaBinding.inflate(LayoutInflater.from(p.getContext()), p, false));
         }
 
         @Override public void onBindViewHolder(@NonNull ViewHolder h, int pos) {
             if (pos == 0) {
-                h.tvJobTitle.setText("Técnico de Operaciones Mineras");
-                h.tvCompanyName.setText("Yanacocha");
-                h.tvDistance.setText("1.2 km");
-                h.tvAddress.setText("Jr. del Comercio");
-                h.tvSalary.setText("S/. 3,500/mes");
+                h.b.tvJobTitle.setText("Técnico de Operaciones Mineras");
+                h.b.tvCompanyName.setText("Yanacocha");
+                h.b.tvDistance.setText("1.2 km");
+                h.b.tvAddress.setText("Jr. del Comercio");
+                h.b.tvSalary.setText("S/. 3,500/mes");
             } else if (pos == 1) {
-                h.tvJobTitle.setText("Enfermero/a Asistencial");
-                h.tvCompanyName.setText("Hospital Regional Cajamarca");
-                h.tvDistance.setText("0.8 km");
-                h.tvAddress.setText("Av. Atahualpa");
-                h.tvSalary.setText("S/. 2,100/mes");
+                h.b.tvJobTitle.setText("Enfermero/a Asistencial");
+                h.b.tvCompanyName.setText("Hospital Regional Cajamarca");
+                h.b.tvDistance.setText("0.8 km");
+                h.b.tvAddress.setText("Av. Atahualpa");
+                h.b.tvSalary.setText("S/. 2,100/mes");
             } else {
-                h.tvJobTitle.setText("Puesto de Trabajo " + (pos + 1));
-                h.tvCompanyName.setText("Empresa Local SAC");
-                h.tvDistance.setText((1 + pos) + ".0 km");
-                h.tvAddress.setText("Centro de Cajamarca");
-                h.tvSalary.setText("S/. 2,500/mes");
+                h.b.tvJobTitle.setText("Puesto de Trabajo " + (pos + 1));
+                h.b.tvCompanyName.setText("Empresa Local SAC");
+                h.b.tvDistance.setText((1 + pos) + ".0 km");
+                h.b.tvAddress.setText("Centro de Cajamarca");
+                h.b.tvSalary.setText("S/. 2,500/mes");
             }
             h.itemView.setOnClickListener(v -> activity.openJobDetail());
         }
@@ -309,14 +293,10 @@ public class MainActivity extends AppCompatActivity {
         @Override public int getItemCount() { return 10; }
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
-            TextView tvJobTitle, tvCompanyName, tvDistance, tvAddress, tvSalary;
-            public ViewHolder(@NonNull View itemView) { 
-                super(itemView);
-                tvJobTitle = itemView.findViewById(R.id.tv_job_title);
-                tvCompanyName = itemView.findViewById(R.id.tv_company_name);
-                tvDistance = itemView.findViewById(R.id.tv_distance);
-                tvAddress = itemView.findViewById(R.id.tv_address);
-                tvSalary = itemView.findViewById(R.id.tv_salary);
+            ItemOfertaBinding b;
+            public ViewHolder(ItemOfertaBinding binding) { 
+                super(binding.getRoot());
+                this.b = binding;
             }
         }
     }
