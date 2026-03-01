@@ -3,10 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
@@ -115,10 +111,12 @@
                     android:textStyle="bold" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_nombre"
                     style="@style/LoginInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp">
+                    android:layout_marginTop="8dp"
+                    app:errorEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_nombre"
@@ -131,16 +129,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="8dp"
                     android:text="@string/last_name_label"
                     android:textColor="@color/login_label"
                     android:textStyle="bold" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_apellido"
                     style="@style/LoginInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp">
+                    android:layout_marginTop="8dp"
+                    app:errorEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_apellido"
@@ -153,38 +153,43 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="8dp"
                     android:text="@string/phone_label"
                     android:textColor="@color/login_label"
                     android:textStyle="bold" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_telefono"
                     style="@style/LoginInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp">
+                    android:layout_marginTop="8dp"
+                    app:errorEnabled="true">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_telefono"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/phone_hint"
-                        android:inputType="phone" />
+                        android:inputType="phone"
+                        android:maxLength="9" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="8dp"
                     android:text="@string/login_email_label"
                     android:textColor="@color/login_label"
                     android:textStyle="bold" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_correo"
                     style="@style/LoginInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    app:errorEnabled="true"
                     app:startIconDrawable="@drawable/ic_email">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -198,16 +203,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="8dp"
                     android:text="@string/login_password_label"
                     android:textColor="@color/login_label"
                     android:textStyle="bold" />
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/til_password"
                     style="@style/LoginInputLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    app:errorEnabled="true"
                     app:passwordToggleEnabled="true"
                     app:startIconDrawable="@drawable/ic_lock">
 

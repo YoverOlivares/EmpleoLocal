@@ -43,7 +43,7 @@
     <string name="location_title">Ubicación</string>
     <string name="location_subtitle">Ayúdanos a encontrarte las mejores ofertas locales cerca de ti.</string>
     <string name="use_current_location">Usar mi ubicación actual</string>
-    <string name="location_precision_hint">Precisión a nivel distrital en Cajamarca</string>
+    <string name="location_precision_hint">Precisión a nivel distrital en Perú</string>
     <string name="region_label">REGIÓN</string>
     <string name="provincia_label">PROVINCIA</string>
     <string name="distrito_label">DISTRITO</string>
