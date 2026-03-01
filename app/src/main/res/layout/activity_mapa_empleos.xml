@@ -2,17 +2,18 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#E0E0E0"
     tools:context=".ui.mapa.MapaActivity">
 
-    <!-- Simulación del Mapa (Aquí irá Google Maps) -->
-    <View
-        android:id="@+id/map_placeholder"
+    <!-- Google Maps Fragment -->
+    <fragment
+        android:id="@+id/map"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/ic_launcher_background" />
+        android:layout_height="match_parent" />
 
     <!-- Buscador sobre el mapa -->
     <LinearLayout
@@ -95,6 +96,7 @@
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:visibility="gone"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="24dp"
         app:cardElevation="8dp"
@@ -126,6 +128,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/tv_job_title_map"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Técnico Minero - Yanacocha"
@@ -134,6 +137,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tv_job_location_map"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="2dp"
