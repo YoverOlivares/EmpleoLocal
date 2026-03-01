@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
@@ -14,52 +13,47 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
+import unc.edu.pe.empleolocal.databinding.ActivityDetalleOfertaBinding;
+import unc.edu.pe.empleolocal.databinding.ActivityEditarPerfilBinding;
+import unc.edu.pe.empleolocal.databinding.ActivityFiltrarOfertasBinding;
+import unc.edu.pe.empleolocal.databinding.ActivityInicioBinding;
+import unc.edu.pe.empleolocal.databinding.ActivityMainBinding;
+import unc.edu.pe.empleolocal.databinding.ActivityMapaEmpleosBinding;
+import unc.edu.pe.empleolocal.databinding.ActivityNotificacionesBinding;
+import unc.edu.pe.empleolocal.databinding.ActivityPerfilBinding;
+import unc.edu.pe.empleolocal.databinding.ActivityPerfilEmpresaBinding;
+import unc.edu.pe.empleolocal.databinding.ActivityPostulacionesBinding;
+import unc.edu.pe.empleolocal.databinding.ActivitySeguimientoPostulacionBinding;
+import unc.edu.pe.empleolocal.databinding.ItemOfertaBinding;
+import unc.edu.pe.empleolocal.databinding.LayoutLocationSelectionBinding;
+
 public class MainActivity extends AppCompatActivity {
 
-    private TextView tvToolbarTitle;
-    private View flNotifications;
-    private View ivEditProfile;
-    private View ivBackButton;
-    private View tvSaveButton;
-    private View tvMarkReadButton;
-    private View ivBookmark;
-    private BottomNavigationView bottomNavigation;
+    private ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main);
-
-        // Inicializar vistas
-        tvToolbarTitle = findViewById(R.id.tv_toolbar_title);
-        flNotifications = findViewById(R.id.fl_notifications);
-        ivEditProfile = findViewById(R.id.iv_edit_profile);
-        ivBackButton = findViewById(R.id.iv_back_button);
-        tvSaveButton = findViewById(R.id.tv_save_button);
-        tvMarkReadButton = findViewById(R.id.tv_mark_read_button);
-        ivBookmark = findViewById(R.id.iv_bookmark);
-        bottomNavigation = findViewById(R.id.bottom_navigation);
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         // Manejo de Insets
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main_root), (v, insets) -> {
+        ViewCompat.setOnApplyWindowInsetsListener(binding.mainRoot, (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
 
         // Configurar navegación
-        bottomNavigation.setOnItemSelectedListener(item -> {
-            bottomNavigation.getMenu().setGroupCheckable(0, true, true);
+        binding.bottomNavigation.setOnItemSelectedListener(item -> {
+            binding.bottomNavigation.getMenu().setGroupCheckable(0, true, true);
             int id = item.getItemId();
             
             if (id == R.id.nav_home) {
@@ -83,28 +77,28 @@ public class MainActivity extends AppCompatActivity {
         });
 
         // Clic en la campana de notificaciones
-        flNotifications.setOnClickListener(v -> {
+        binding.flNotifications.setOnClickListener(v -> {
             updateToolbar("Notificaciones", false, false, true, false, true, false);
             deselectBottomNav();
             loadFragment(new NotificacionesFragment());
         });
 
         // Clic en el lápiz para editar perfil
-        ivEditProfile.setOnClickListener(v -> {
+        binding.ivEditProfile.setOnClickListener(v -> {
             updateToolbar("Editar Perfil", false, false, true, true, false, false);
             deselectBottomNav();
             loadFragment(new EditarPerfilFragment());
         });
 
         // Clic en botón atrás
-        ivBackButton.setOnClickListener(v -> {
-            bottomNavigation.getMenu().setGroupCheckable(0, true, true);
-            bottomNavigation.setSelectedItemId(bottomNavigation.getSelectedItemId());
+        binding.ivBackButton.setOnClickListener(v -> {
+            binding.bottomNavigation.getMenu().setGroupCheckable(0, true, true);
+            binding.bottomNavigation.setSelectedItemId(binding.bottomNavigation.getSelectedItemId());
         });
 
         // Cargar pantalla de inicio por defecto
         if (savedInstanceState == null) {
-            bottomNavigation.setSelectedItemId(R.id.nav_home);
+            binding.bottomNavigation.setSelectedItemId(R.id.nav_home);
         }
     }
 
@@ -132,20 +126,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void deselectBottomNav() {
-        bottomNavigation.getMenu().setGroupCheckable(0, false, true);
-        for (int i = 0; i < bottomNavigation.getMenu().size(); i++) {
-            bottomNavigation.getMenu().getItem(i).setChecked(false);
+        binding.bottomNavigation.getMenu().setGroupCheckable(0, false, true);
+        for (int i = 0; i < binding.bottomNavigation.getMenu().size(); i++) {
+            binding.bottomNavigation.getMenu().getItem(i).setChecked(false);
         }
     }
 
     private void updateToolbar(String title, boolean showNotif, boolean showEdit, boolean showBack, boolean showSave, boolean showMarkRead, boolean showBookmark) {
-        if (tvToolbarTitle != null) tvToolbarTitle.setText(title);
-        if (flNotifications != null) flNotifications.setVisibility(showNotif ? View.VISIBLE : View.GONE);
-        if (ivEditProfile != null) ivEditProfile.setVisibility(showEdit ? View.VISIBLE : View.GONE);
-        if (ivBackButton != null) ivBackButton.setVisibility(showBack ? View.VISIBLE : View.GONE);
-        if (tvSaveButton != null) tvSaveButton.setVisibility(showSave ? View.VISIBLE : View.GONE);
-        if (tvMarkReadButton != null) tvMarkReadButton.setVisibility(showMarkRead ? View.VISIBLE : View.GONE);
-        if (ivBookmark != null) ivBookmark.setVisibility(showBookmark ? View.VISIBLE : View.GONE);
+        binding.tvToolbarTitle.setText(title);
+        binding.flNotifications.setVisibility(showNotif ? View.VISIBLE : View.GONE);
+        binding.ivEditProfile.setVisibility(showEdit ? View.VISIBLE : View.GONE);
+        binding.ivBackButton.setVisibility(showBack ? View.VISIBLE : View.GONE);
+        binding.tvSaveButton.setVisibility(showSave ? View.VISIBLE : View.GONE);
+        binding.tvMarkReadButton.setVisibility(showMarkRead ? View.VISIBLE : View.GONE);
+        binding.ivBookmark.setVisibility(showBookmark ? View.VISIBLE : View.GONE);
     }
 
     private void loadFragment(Fragment fragment) {
@@ -157,120 +151,148 @@ public class MainActivity extends AppCompatActivity {
     // --- FRAGMENTS ---
 
     public static class InicioFragment extends Fragment {
+        private ActivityInicioBinding binding;
+
         @Nullable @Override public View onCreateView(@NonNull LayoutInflater i, @Nullable ViewGroup c, @Nullable Bundle s) {
-            View view = i.inflate(R.layout.activity_inicio, c, false);
+            binding = ActivityInicioBinding.inflate(i, c, false);
             
             // Botón "Cambiar" ubicación
-            view.findViewById(R.id.tv_change).setOnClickListener(v -> {
+            binding.tvChange.setOnClickListener(v -> {
                 showLocationDialog();
             });
 
-            RecyclerView rv = view.findViewById(R.id.rv_inicio_ofertas);
-            rv.setLayoutManager(new LinearLayoutManager(getContext()));
-            rv.setAdapter(new SimpleOfertaAdapter((MainActivity) getActivity()));
-            return view;
+            binding.rvInicioOfertas.setLayoutManager(new LinearLayoutManager(getContext()));
+            binding.rvInicioOfertas.setAdapter(new SimpleOfertaAdapter((MainActivity) getActivity()));
+            return binding.getRoot();
         }
 
         private void showLocationDialog() {
             BottomSheetDialog dialog = new BottomSheetDialog(requireContext());
-            View dialogView = LayoutInflater.from(getContext()).inflate(R.layout.layout_location_selection, null);
-            dialog.setContentView(dialogView);
+            LayoutLocationSelectionBinding dialogBinding = LayoutLocationSelectionBinding.inflate(LayoutInflater.from(getContext()));
+            dialog.setContentView(dialogBinding.getRoot());
             
             // Botón Aplicar dentro de la tarjeta
-            dialogView.findViewById(R.id.btn_apply_location).setOnClickListener(v -> {
+            dialogBinding.btnApplyLocation.setOnClickListener(v -> {
                 dialog.dismiss();
             });
             
             dialog.show();
         }
+
+        @Override public void onDestroyView() {
+            super.onDestroyView();
+            binding = null;
+        }
     }
 
     public static class MapaFragment extends Fragment {
+        private ActivityMapaEmpleosBinding binding;
+
         @Nullable @Override public View onCreateView(@NonNull LayoutInflater i, @Nullable ViewGroup c, @Nullable Bundle s) {
-            View view = i.inflate(R.layout.activity_mapa_empleos, c, false);
-            View bottomSheet = view.findViewById(R.id.bottom_sheet);
+            binding = ActivityMapaEmpleosBinding.inflate(i, c, false);
+            View bottomSheet = binding.bottomSheet;
             BottomSheetBehavior<View> behavior = BottomSheetBehavior.from(bottomSheet);
-            view.findViewById(R.id.view_list_btn_container).setOnClickListener(v -> {
+            binding.viewListBtnContainer.setOnClickListener(v -> {
                 behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
             });
-            RecyclerView rv = view.findViewById(R.id.list_container_rv);
-            if (rv != null) {
-                rv.setLayoutManager(new LinearLayoutManager(getContext()));
-                rv.setAdapter(new SimpleOfertaAdapter((MainActivity) getActivity()));
+            
+            if (binding.listContainerRv != null) {
+                binding.listContainerRv.setLayoutManager(new LinearLayoutManager(getContext()));
+                binding.listContainerRv.setAdapter(new SimpleOfertaAdapter((MainActivity) getActivity()));
             }
-            view.findViewById(R.id.card_selected_job).setOnClickListener(v -> {
+            binding.cardSelectedJob.setOnClickListener(v -> {
                 ((MainActivity) getActivity()).openJobDetail();
             });
-            view.findViewById(R.id.fab_my_location).setOnClickListener(v -> {
+            binding.fabMyLocation.setOnClickListener(v -> {
                 ((MainActivity) getActivity()).openFilters();
             });
-            view.findViewById(R.id.fab_filter).setOnClickListener(v -> {
+            binding.fabFilter.setOnClickListener(v -> {
                 ((MainActivity) getActivity()).openFilters();
             });
-            return view;
+            return binding.getRoot();
+        }
+
+        @Override public void onDestroyView() {
+            super.onDestroyView();
+            binding = null;
         }
     }
 
     public static class PostulacionesFragment extends Fragment {
+        private ActivityPostulacionesBinding binding;
+
         @Nullable @Override public View onCreateView(@NonNull LayoutInflater i, @Nullable ViewGroup c, @Nullable Bundle s) {
-            View view = i.inflate(R.layout.activity_postulaciones, c, false);
-            view.findViewById(R.id.item_revision).findViewById(R.id.btn_ver_detalle).setOnClickListener(v -> {
+            binding = ActivityPostulacionesBinding.inflate(i, c, false);
+            
+            // Usar camelCase directamente sobre el binding del include
+            binding.itemRevision.btnVerDetalle.setOnClickListener(v -> {
                 ((MainActivity) getActivity()).openTracking();
             });
-            view.findViewById(R.id.item_entrevista).findViewById(R.id.btn_ver_detalle_entrevista).setOnClickListener(v -> {
+            binding.itemEntrevista.btnVerDetalleEntrevista.setOnClickListener(v -> {
                 ((MainActivity) getActivity()).openTracking();
             });
-            view.findViewById(R.id.item_rechazada).findViewById(R.id.btn_ver_detalle_rechazada).setOnClickListener(v -> {
+            binding.itemRechazada.btnVerDetalleRechazada.setOnClickListener(v -> {
                 ((MainActivity) getActivity()).openTracking();
             });
-            return view;
+            return binding.getRoot();
+        }
+
+        @Override public void onDestroyView() {
+            super.onDestroyView();
+            binding = null;
         }
     }
 
     public static class PerfilFragment extends Fragment {
         @Nullable @Override public View onCreateView(@NonNull LayoutInflater i, @Nullable ViewGroup c, @Nullable Bundle s) {
-            return i.inflate(R.layout.activity_perfil, c, false);
+            return ActivityPerfilBinding.inflate(i, c, false).getRoot();
         }
     }
 
     public static class EditarPerfilFragment extends Fragment {
         @Nullable @Override public View onCreateView(@NonNull LayoutInflater i, @Nullable ViewGroup c, @Nullable Bundle s) {
-            return i.inflate(R.layout.activity_editar_perfil, c, false);
+            return ActivityEditarPerfilBinding.inflate(i, c, false).getRoot();
         }
     }
 
     public static class NotificacionesFragment extends Fragment {
         @Nullable @Override public View onCreateView(@NonNull LayoutInflater i, @Nullable ViewGroup c, @Nullable Bundle s) {
-            return i.inflate(R.layout.activity_notificaciones, c, false);
+            return ActivityNotificacionesBinding.inflate(i, c, false).getRoot();
         }
     }
 
     public static class DetalleOfertaFragment extends Fragment {
+        private ActivityDetalleOfertaBinding binding;
+
         @Nullable @Override public View onCreateView(@NonNull LayoutInflater i, @Nullable ViewGroup c, @Nullable Bundle s) {
-            View view = i.inflate(R.layout.activity_detalle_oferta, i.inflate(R.layout.activity_detalle_oferta, c, false) instanceof ViewGroup ? (ViewGroup) i.inflate(R.layout.activity_detalle_oferta, c, false) : c, false);
-            view.findViewById(R.id.cv_company_header).setOnClickListener(v -> {
+            binding = ActivityDetalleOfertaBinding.inflate(i, c, false);
+            binding.cvCompanyHeader.setOnClickListener(v -> {
                 ((MainActivity) getActivity()).openCompanyProfile();
             });
-            return view;
+            return binding.getRoot();
         }
-        @Override public View getView() { return super.getView(); }
+
+        @Override public void onDestroyView() {
+            super.onDestroyView();
+            binding = null;
+        }
     }
 
     public static class PerfilEmpresaFragment extends Fragment {
         @Nullable @Override public View onCreateView(@NonNull LayoutInflater i, @Nullable ViewGroup c, @Nullable Bundle s) {
-            return i.inflate(R.layout.activity_perfil_empresa, c, false);
+            return ActivityPerfilEmpresaBinding.inflate(i, c, false).getRoot();
         }
     }
 
     public static class SeguimientoFragment extends Fragment {
         @Nullable @Override public View onCreateView(@NonNull LayoutInflater i, @Nullable ViewGroup c, @Nullable Bundle s) {
-            return i.inflate(R.layout.activity_seguimiento_postulacion, c, false);
+            return ActivitySeguimientoPostulacionBinding.inflate(i, c, false).getRoot();
         }
     }
 
     public static class FiltrarOfertasFragment extends Fragment {
         @Nullable @Override public View onCreateView(@NonNull LayoutInflater i, @Nullable ViewGroup c, @Nullable Bundle s) {
-            return i.inflate(R.layout.activity_filtrar_ofertas, c, false);
+            return ActivityFiltrarOfertasBinding.inflate(i, c, false).getRoot();
         }
     }
 
@@ -280,28 +302,29 @@ public class MainActivity extends AppCompatActivity {
         public SimpleOfertaAdapter(MainActivity activity) { this.activity = activity; }
 
         @NonNull @Override public ViewHolder onCreateViewHolder(@NonNull ViewGroup p, int t) {
-            return new ViewHolder(LayoutInflater.from(p.getContext()).inflate(R.layout.item_oferta, p, false));
+            ItemOfertaBinding binding = ItemOfertaBinding.inflate(LayoutInflater.from(p.getContext()), p, false);
+            return new ViewHolder(binding);
         }
 
         @Override public void onBindViewHolder(@NonNull ViewHolder h, int pos) {
             if (pos == 0) {
-                h.tvJobTitle.setText("Técnico de Operaciones Mineras");
-                h.tvCompanyName.setText("Yanacocha");
-                h.tvDistance.setText("1.2 km");
-                h.tvAddress.setText("Jr. del Comercio");
-                h.tvSalary.setText("S/. 3,500/mes");
+                h.binding.tvJobTitle.setText("Técnico de Operaciones Mineras");
+                h.binding.tvCompanyName.setText("Yanacocha");
+                h.binding.tvDistance.setText("1.2 km");
+                h.binding.tvAddress.setText("Jr. del Comercio");
+                h.binding.tvSalary.setText("S/. 3,500/mes");
             } else if (pos == 1) {
-                h.tvJobTitle.setText("Enfermero/a Asistencial");
-                h.tvCompanyName.setText("Hospital Regional Cajamarca");
-                h.tvDistance.setText("0.8 km");
-                h.tvAddress.setText("Av. Atahualpa");
-                h.tvSalary.setText("S/. 2,100/mes");
+                h.binding.tvJobTitle.setText("Enfermero/a Asistencial");
+                h.binding.tvCompanyName.setText("Hospital Regional Cajamarca");
+                h.binding.tvDistance.setText("0.8 km");
+                h.binding.tvAddress.setText("Av. Atahualpa");
+                h.binding.tvSalary.setText("S/. 2,100/mes");
             } else {
-                h.tvJobTitle.setText("Puesto de Trabajo " + (pos + 1));
-                h.tvCompanyName.setText("Empresa Local SAC");
-                h.tvDistance.setText((1 + pos) + ".0 km");
-                h.tvAddress.setText("Centro de Cajamarca");
-                h.tvSalary.setText("S/. 2,500/mes");
+                h.binding.tvJobTitle.setText("Puesto de Trabajo " + (pos + 1));
+                h.binding.tvCompanyName.setText("Empresa Local SAC");
+                h.binding.tvDistance.setText((1 + pos) + ".0 km");
+                h.binding.tvAddress.setText("Centro de Cajamarca");
+                h.binding.tvSalary.setText("S/. 2,500/mes");
             }
             h.itemView.setOnClickListener(v -> activity.openJobDetail());
         }
@@ -309,14 +332,10 @@ public class MainActivity extends AppCompatActivity {
         @Override public int getItemCount() { return 10; }
 
         public static class ViewHolder extends RecyclerView.ViewHolder {
-            TextView tvJobTitle, tvCompanyName, tvDistance, tvAddress, tvSalary;
-            public ViewHolder(@NonNull View itemView) { 
-                super(itemView);
-                tvJobTitle = itemView.findViewById(R.id.tv_job_title);
-                tvCompanyName = itemView.findViewById(R.id.tv_company_name);
-                tvDistance = itemView.findViewById(R.id.tv_distance);
-                tvAddress = itemView.findViewById(R.id.tv_address);
-                tvSalary = itemView.findViewById(R.id.tv_salary);
+            final ItemOfertaBinding binding;
+            public ViewHolder(@NonNull ItemOfertaBinding binding) { 
+                super(binding.getRoot());
+                this.binding = binding;
             }
         }
     }
