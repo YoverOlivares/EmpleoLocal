@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 
@@ -13,11 +12,9 @@ import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.google.android.gms.location.CurrentLocationRequest;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -30,15 +27,11 @@ import java.util.Locale;
 
 import unc.edu.pe.empleolocal.data.model.User;
 import unc.edu.pe.empleolocal.databinding.ActivityRegistroPaso2Binding;
-import unc.edu.pe.empleolocal.ui.auth.AuthViewModel;
-import unc.edu.pe.empleolocal.ui.main.MainActivity;
-import unc.edu.pe.empleolocal.utils.NotificationHelper;
 import unc.edu.pe.empleolocal.utils.ViewUtils;
 
 public class RegistroPaso2Activity extends AppCompatActivity {
 
     private ActivityRegistroPaso2Binding binding;
-    private AuthViewModel authViewModel;
     private User user;
     private String password;
     private FusedLocationProviderClient fusedLocationClient;
@@ -53,7 +46,6 @@ public class RegistroPaso2Activity extends AppCompatActivity {
         binding = ActivityRegistroPaso2Binding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        authViewModel = new ViewModelProvider(this).get(AuthViewModel.class);
         user = (User) getIntent().getSerializableExtra("user_data");
         password = getIntent().getStringExtra("password");
 
@@ -81,7 +73,7 @@ public class RegistroPaso2Activity extends AppCompatActivity {
 
         binding.btnContinueStep2.setOnClickListener(v -> {
             if (currentLat == 0 || currentLng == 0) {
-                ViewUtils.showSnackbar(this, "Debe activar su ubicación para finalizar", ViewUtils.MsgType.WARNING);
+                ViewUtils.showSnackbar(this, "Debe activar su ubicación para continuar", ViewUtils.MsgType.WARNING);
                 return;
             }
 
@@ -94,52 +86,17 @@ public class RegistroPaso2Activity extends AppCompatActivity {
                 return;
             }
 
-            // Completar objeto usuario
+            // Completar objeto usuario temporalmente
             user.setLatitud(currentLat);
             user.setLongitud(currentLng);
             user.setRadioBusqueda((int) binding.layoutLocation.sliderRadius.getValue());
             user.setDireccion(distrito + ", " + provincia + ", " + region);
 
-            // Solicitar permiso de notificaciones antes de registrar (Android 13+)
-            checkNotificationPermissionAndRegister();
-        });
-
-        setupObservers();
-    }
-
-    private void checkNotificationPermissionAndRegister() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 101);
-            } else {
-                authViewModel.register(user, password);
-            }
-        } else {
-            authViewModel.register(user, password);
-        }
-    }
-
-    private void setupObservers() {
-        authViewModel.getUserLiveData().observe(this, firebaseUser -> {
-            if (firebaseUser != null) {
-                NotificationHelper.showWelcomeNotification(this, user.getNombre());
-                ViewUtils.showSnackbar(this, "¡Bienvenido! Registro completado", ViewUtils.MsgType.SUCCESS);
-                
-                Intent intent = new Intent(this, MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-            }
-        });
-
-        authViewModel.getErrorLiveData().observe(this, error -> {
-            if (error != null) {
-                ViewUtils.showSnackbar(this, error, ViewUtils.MsgType.ERROR);
-            }
-        });
-
-        authViewModel.getIsLoading().observe(this, loading -> {
-            binding.btnContinueStep2.setEnabled(!loading);
-            binding.btnContinueStep2.setText(loading ? "Procesando..." : "Finalizar Registro");
+            // PASAR AL PASO 3 (OBLIGATORIO)
+            Intent intent = new Intent(this, RegistroPaso3Activity.class);
+            intent.putExtra("user_data", user);
+            intent.putExtra("password", password);
+            startActivity(intent);
         });
     }
 
@@ -201,9 +158,8 @@ public class RegistroPaso2Activity extends AppCompatActivity {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if (requestCode == 101 || (requestCode == 100 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-            if (requestCode == 100) getCurrentLocation();
-            else authViewModel.register(user, password);
+        if (requestCode == 100 && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            getCurrentLocation();
         }
     }
 }

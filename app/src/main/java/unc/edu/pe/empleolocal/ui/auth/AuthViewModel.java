@@ -8,6 +8,11 @@ import androidx.lifecycle.ViewModel;
 
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import unc.edu.pe.empleolocal.data.model.User;
 import unc.edu.pe.empleolocal.data.repository.FirebaseRepository;
@@ -19,6 +24,7 @@ public class AuthViewModel extends ViewModel {
     private final MutableLiveData<Boolean> isLoading = new MutableLiveData<>(false);
     private final MutableLiveData<String> successMessage = new MutableLiveData<>();
     private final MutableLiveData<Boolean> isEmailAvailable = new MutableLiveData<>();
+    private final MutableLiveData<List<String>> sectorsLiveData = new MutableLiveData<>();
 
     public AuthViewModel() {
         this.repository = new FirebaseRepository();
@@ -29,6 +35,7 @@ public class AuthViewModel extends ViewModel {
     public LiveData<Boolean> getIsLoading() { return isLoading; }
     public LiveData<String> getSuccessMessage() { return successMessage; }
     public LiveData<Boolean> getIsEmailAvailable() { return isEmailAvailable; }
+    public LiveData<List<String>> getSectorsLiveData() { return sectorsLiveData; }
 
     public void login(String email, String password) {
         isLoading.setValue(true);
@@ -47,7 +54,6 @@ public class AuthViewModel extends ViewModel {
         repository.checkEmailRegistered(email).addOnCompleteListener(task -> {
             isLoading.setValue(false);
             if (task.isSuccessful() && task.getResult() != null) {
-                // Si la lista de métodos no está vacía, el correo YA está registrado
                 boolean exists = task.getResult().getSignInMethods() != null && 
                                 !task.getResult().getSignInMethods().isEmpty();
                 if (exists) {
@@ -57,8 +63,6 @@ public class AuthViewModel extends ViewModel {
                     isEmailAvailable.setValue(true);
                 }
             } else {
-                // Por seguridad de Firebase, a veces falla la consulta. 
-                // Si no podemos verificar, permitimos pasar y que el error salte en el registro final.
                 isEmailAvailable.setValue(true); 
             }
         });
@@ -66,6 +70,32 @@ public class AuthViewModel extends ViewModel {
 
     public void resetEmailAvailableState() {
         isEmailAvailable.setValue(null);
+    }
+
+    public void fetchSectors() {
+        isLoading.setValue(true);
+        repository.getSectors().addOnCompleteListener(task -> {
+            isLoading.setValue(false);
+            List<String> sectors = new ArrayList<>();
+            
+            if (task.isSuccessful() && task.getResult() != null && !task.getResult().isEmpty()) {
+                // Si hay datos en Firebase, los usamos
+                for (DocumentSnapshot doc : task.getResult()) {
+                    String name = doc.getString("nombre");
+                    if (name != null) sectors.add(name);
+                }
+                sectorsLiveData.setValue(sectors);
+            } else {
+                // FALLBACK: Si Firebase está vacío o hay error de permisos, usamos la lista profesional
+                sectors.addAll(Arrays.asList(
+                    "Ingeniería", "Minería", "Salud", "Educación", 
+                    "Agropecuario", "Turismo", "Gastronomía", 
+                    "Construcción", "Comercio", "Tecnología", 
+                    "Finanzas", "Administración", "Ventas"
+                ));
+                sectorsLiveData.setValue(sectors);
+            }
+        });
     }
 
     public void register(User userData, String password) {
@@ -79,7 +109,7 @@ public class AuthViewModel extends ViewModel {
                     if (saveTask.isSuccessful()) {
                         userLiveData.setValue(task.getResult().getUser());
                     } else {
-                        errorLiveData.setValue("Error al crear el perfil de usuario");
+                        errorLiveData.setValue("Error al crear el perfil en la base de datos.");
                     }
                 });
             } else {
@@ -98,21 +128,18 @@ public class AuthViewModel extends ViewModel {
             errorLiveData.setValue("Ingrese su correo electrónico");
             return;
         }
-
         String cleanEmail = email.trim().toLowerCase();
-        
         if (!Patterns.EMAIL_ADDRESS.matcher(cleanEmail).matches()) {
             errorLiveData.setValue("El formato del correo no es válido");
             return;
         }
-
         isLoading.setValue(true);
         repository.sendPasswordResetEmail(cleanEmail).addOnCompleteListener(task -> {
             isLoading.setValue(false);
             if (task.isSuccessful()) {
-                successMessage.setValue("Enlace de recuperación enviado. Revise su bandeja de entrada.");
+                successMessage.setValue("Si el correo ingresado se encuentra registrado, recibirás un mensaje para restablecer tu contraseña.");
             } else {
-                errorLiveData.setValue("No se pudo enviar el correo de recuperación");
+                errorLiveData.setValue("No se pudo procesar la solicitud.");
             }
         });
     }
