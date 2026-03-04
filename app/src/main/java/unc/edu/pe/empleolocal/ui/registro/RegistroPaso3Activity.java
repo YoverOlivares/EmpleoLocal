@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -20,6 +21,7 @@ import com.google.android.material.chip.Chip;
 import java.util.ArrayList;
 import java.util.List;
 
+import unc.edu.pe.empleolocal.R;
 import unc.edu.pe.empleolocal.data.model.User;
 import unc.edu.pe.empleolocal.databinding.ActivityRegistroPaso3Binding;
 import unc.edu.pe.empleolocal.ui.auth.AuthViewModel;
@@ -53,25 +55,65 @@ public class RegistroPaso3Activity extends AppCompatActivity {
 
         binding.toolbar.setNavigationOnClickListener(v -> getOnBackPressedDispatcher().onBackPressed());
 
+        setupObservers();
+        
+        // Cargar sectores desde Firebase
+        authViewModel.fetchSectors();
+
         binding.btnFinish.setOnClickListener(v -> {
-            List<String> selectedSkills = new ArrayList<>();
+            List<String> selectedSectors = new ArrayList<>();
             for (int i = 0; i < binding.chipGroup.getChildCount(); i++) {
                 Chip chip = (Chip) binding.chipGroup.getChildAt(i);
                 if (chip.isChecked()) {
-                    selectedSkills.add(chip.getText().toString());
+                    selectedSectors.add(chip.getText().toString());
                 }
             }
 
-            if (selectedSkills.isEmpty()) {
-                ViewUtils.showSnackbar(this, "Por favor, selecciona al menos una área de experiencia", ViewUtils.MsgType.WARNING);
+            if (selectedSectors.isEmpty()) {
+                ViewUtils.showSnackbar(this, "Por favor, selecciona al menos un sector de experiencia", ViewUtils.MsgType.WARNING);
                 return;
             }
 
-            user.setHabilidades(selectedSkills);
+            user.setSectores(selectedSectors);
             checkNotificationPermissionAndRegister();
         });
+    }
 
-        setupObservers();
+    private void setupObservers() {
+        authViewModel.getSectorsLiveData().observe(this, sectors -> {
+            binding.chipGroup.removeAllViews();
+            for (String sector : sectors) {
+                Chip chip = new Chip(this);
+                chip.setText(sector);
+                chip.setCheckable(true);
+                chip.setClickable(true);
+                chip.setFocusable(true);
+                chip.setChipBackgroundColorResource(R.color.selector_chip_background);
+                chip.setTextColor(ContextCompat.getColorStateList(this, R.color.selector_chip_text));
+
+                // Corregido: Los nombres correctos de los métodos en Material Components
+                chip.setCheckedIconVisible(true);
+                chip.setCheckedIcon(ContextCompat.getDrawable(this, R.drawable.ic_check));
+
+                binding.chipGroup.addView(chip);
+            }
+        });
+
+        authViewModel.getUserLiveData().observe(this, firebaseUser -> {
+            if (firebaseUser != null) {
+                NotificationHelper.showWelcomeNotification(this, user.getNombre());
+                ViewUtils.showSnackbar(this, "¡Bienvenido! Registro completado", ViewUtils.MsgType.SUCCESS);
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+            }
+        });
+
+        authViewModel.getErrorLiveData().observe(this, error -> {
+            if (error != null) ViewUtils.showSnackbar(this, error, ViewUtils.MsgType.ERROR);
+        });
+        
+        authViewModel.getIsLoading().observe(this, loading -> binding.btnFinish.setEnabled(!loading));
     }
 
     private void checkNotificationPermissionAndRegister() {
@@ -86,29 +128,8 @@ public class RegistroPaso3Activity extends AppCompatActivity {
         }
     }
 
-    private void setupObservers() {
-        authViewModel.getUserLiveData().observe(this, firebaseUser -> {
-            if (firebaseUser != null) {
-                NotificationHelper.showWelcomeNotification(this, user.getNombre());
-                ViewUtils.showSnackbar(this, "¡Bienvenido! Registro completado con éxito", ViewUtils.MsgType.SUCCESS);
-                
-                Intent intent = new Intent(RegistroPaso3Activity.this, MainActivity.class);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(intent);
-            }
-        });
-
-        authViewModel.getErrorLiveData().observe(this, error -> {
-            if (error != null) {
-                ViewUtils.showSnackbar(this, error, ViewUtils.MsgType.ERROR);
-            }
-        });
-        
-        authViewModel.getIsLoading().observe(this, loading -> binding.btnFinish.setEnabled(!loading));
-    }
-
     @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == 101) {
             authViewModel.register(user, password);

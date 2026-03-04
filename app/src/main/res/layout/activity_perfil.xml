@@ -8,10 +8,11 @@
     </data>
 
     <androidx.core.widget.NestedScrollView
+        android:id="@+id/main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/screen_bg"
-        tools:context=".perfil">
+        tools:context=".ui.perfil.PerfilActivity">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -45,29 +46,32 @@
                         app:strokeWidth="4dp">
 
                         <TextView
+                            android:id="@+id/tv_user_initials"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center"
-                            android:text="@string/user_initials"
+                            android:text=""
                             android:textColor="@color/white"
                             android:textSize="32sp"
                             android:textStyle="bold" />
                     </com.google.android.material.card.MaterialCardView>
 
                     <TextView
+                        android:id="@+id/tv_user_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="16dp"
-                        android:text="@string/user_name"
+                        android:text=""
                         android:textColor="@color/login_logo_text"
                         android:textSize="22sp"
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tv_user_role"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
-                        android:text="@string/user_role"
+                        android:text="Candidato"
                         android:textColor="@color/login_blue_text"
                         android:textSize="16sp"
                         android:textStyle="bold" />
@@ -87,10 +91,11 @@
                             android:contentDescription="@string/user_location" />
 
                         <TextView
+                            android:id="@+id/tv_user_location"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="4dp"
-                            android:text="@string/user_location"
+                            android:text=""
                             android:textColor="@color/login_subtitle"
                             android:textSize="14sp" />
                     </LinearLayout>
@@ -98,7 +103,7 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Stats Cards (REUTILIZANDO item_profile_stat) -->
+            <!-- Stats Cards -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -151,7 +156,6 @@
                     android:orientation="vertical"
                     android:padding="16dp">
 
-                    <!-- Ubicación y Radio -->
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
@@ -174,21 +178,23 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/tv_location_address"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/iv_loc"
                             android:layout_alignStart="@id/iv_loc"
                             android:layout_marginTop="8dp"
-                            android:text="Cajamarca Centro"
+                            android:text=""
                             android:textColor="@color/login_subtitle" />
 
                         <TextView
+                            android:id="@+id/tv_location_radio"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
                             android:layout_alignTop="@id/iv_loc"
                             android:layout_marginTop="20dp"
-                            android:text="5 km"
+                            android:text=""
                             android:textColor="@color/login_blue_text"
                             android:textStyle="bold" />
                     </RelativeLayout>
@@ -196,7 +202,7 @@
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
-            <!-- Mis Habilidades -->
+            <!-- Mis Sectores de Experiencia -->
             <com.google.android.material.card.MaterialCardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -221,57 +227,27 @@
                         <ImageView
                             android:layout_width="24dp"
                             android:layout_height="24dp"
-                            android:src="@drawable/ic_security"
+                            android:src="@drawable/ic_briefcase"
                             app:tint="@color/login_blue_text"
-                            android:contentDescription="@string/profile_skills" />
+                            android:contentDescription="Sectores" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="12dp"
-                            android:text="@string/profile_skills"
+                            android:text="Sectores de experiencia"
                             android:textColor="@color/login_logo_text"
                             android:textStyle="bold" />
                     </LinearLayout>
 
-                    <LinearLayout
+                    <!-- Contenedor de sectores dinámicos -->
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/cg_sectores"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/bg_status_blue"
-                            android:paddingHorizontal="12dp"
-                            android:paddingVertical="6dp"
-                            android:text="@string/exp_mineria"
-                            android:textColor="@color/login_blue_text"
-                            android:textSize="12sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:background="@drawable/bg_status_blue"
-                            android:paddingHorizontal="12dp"
-                            android:paddingVertical="6dp"
-                            android:text="@string/exp_mecanica"
-                            android:textColor="@color/login_blue_text"
-                            android:textSize="12sp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="8dp"
-                            android:background="@drawable/bg_status_blue"
-                            android:paddingHorizontal="12dp"
-                            android:paddingVertical="6dp"
-                            android:text="@string/exp_construccion"
-                            android:textColor="@color/login_blue_text"
-                            android:textSize="12sp" />
-                    </LinearLayout>
+                        app:chipSpacingHorizontal="8dp"
+                        app:chipSpacingVertical="4dp" />
                 </LinearLayout>
             </com.google.android.material.card.MaterialCardView>
 
@@ -303,6 +279,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="12dp"
                         android:layout_toEndOf="@id/iv_pdf"
+                        android:layout_toStartOf="@id/tv_view_cv"
                         android:orientation="vertical">
 
                         <TextView
@@ -313,14 +290,16 @@
                             android:textStyle="bold" />
 
                         <TextView
+                            android:id="@+id/tv_cv_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/profile_cv_file"
+                            android:text=""
                             android:textColor="@color/login_subtitle"
                             android:textSize="12sp" />
                     </LinearLayout>
 
                     <TextView
+                        android:id="@+id/tv_view_cv"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
@@ -382,25 +361,7 @@
                             android:textColor="@color/login_logo_text" />
 
                         <com.google.android.material.materialswitch.MaterialSwitch
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentEnd="true"
-                            android:checked="true" />
-                    </RelativeLayout>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_centerVertical="true"
-                            android:text="@string/profile_notifications"
-                            android:textColor="@color/login_logo_text" />
-
-                        <com.google.android.material.materialswitch.MaterialSwitch
+                            android:id="@+id/sw_notifications"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_alignParentEnd="true"
@@ -411,6 +372,7 @@
 
             <!-- Cerrar Sesión -->
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_logout"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginTop="24dp"

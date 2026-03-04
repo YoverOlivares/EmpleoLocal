@@ -3,10 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
         android:layout_width="match_parent"
@@ -125,6 +121,7 @@
                     app:chipSpacingVertical="8dp">
 
                     <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_mineria"
                         style="@style/Widget.Material3.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -138,6 +135,7 @@
                         app:checkedIconTint="@color/white" />
 
                     <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_agronomia"
                         style="@style/Widget.Material3.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -151,6 +149,21 @@
                         app:checkedIconTint="@color/white" />
 
                     <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_ingenieria"
+                        style="@style/Widget.Material3.Chip.Filter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Ingeniería"
+                        android:textColor="@color/selector_chip_text"
+                        app:chipBackgroundColor="@color/selector_chip_background"
+                        app:chipCornerRadius="24dp"
+                        app:chipStrokeWidth="0dp"
+                        app:checkedIconVisible="true"
+                        app:checkedIcon="@drawable/ic_check"
+                        app:checkedIconTint="@color/white" />
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_enfermeria"
                         style="@style/Widget.Material3.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -164,6 +177,7 @@
                         app:checkedIconTint="@color/white" />
 
                     <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_docencia"
                         style="@style/Widget.Material3.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -177,6 +191,7 @@
                         app:checkedIconTint="@color/white" />
 
                     <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_contabilidad"
                         style="@style/Widget.Material3.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -190,6 +205,7 @@
                         app:checkedIconTint="@color/white" />
 
                     <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_turismo"
                         style="@style/Widget.Material3.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -203,6 +219,7 @@
                         app:checkedIconTint="@color/white" />
 
                     <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_gastronomia"
                         style="@style/Widget.Material3.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -216,6 +233,7 @@
                         app:checkedIconTint="@color/white" />
 
                     <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_construccion"
                         style="@style/Widget.Material3.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -229,6 +247,7 @@
                         app:checkedIconTint="@color/white" />
 
                     <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_mecanica"
                         style="@style/Widget.Material3.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -242,6 +261,7 @@
                         app:checkedIconTint="@color/white" />
 
                     <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_ventas"
                         style="@style/Widget.Material3.Chip.Filter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
