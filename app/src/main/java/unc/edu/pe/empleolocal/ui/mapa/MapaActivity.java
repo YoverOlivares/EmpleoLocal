@@ -15,6 +15,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -94,6 +95,12 @@ public class MapaActivity extends AppCompatActivity implements OnMapReadyCallbac
                 int radiusInMeters = radiusInKm * 1000;
 
                 mMap.clear(); // Limpiar mapa
+
+                // Marcador de ubicación del usuario (Punto azul)
+                mMap.addMarker(new MarkerOptions()
+                        .position(userLocation)
+                        .title("Tu ubicación")
+                        .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
 
                 // Dibujar círculo actualizado
                 mMap.addCircle(new CircleOptions()
