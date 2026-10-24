@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -11,66 +16,70 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EmpleoLocal">
-        <activity
-            android:name=".activity_lista_ofertas"
-            android:exported="false" />
-        <activity
-            android:name=".activity_seguimiento_postulacion"
-            android:exported="false" />
-        <activity
-            android:name=".activity_filtrar_ofertas"
-            android:exported="false" />
-        <activity
-            android:name=".activity_notificaciones"
-            android:exported="false" />
-        <activity
-            android:name=".activity_empleos_guardados"
-            android:exported="false" />
-        <activity
-            android:name=".activity_perfil_empresa"
-            android:exported="false" />
-        <activity
-            android:name=".activity_detalle_oferta"
-            android:exported="false" />
-        <activity
-            android:name=".activity_perfil"
-            android:exported="false" />
-        <activity
-            android:name=".activity_postulaciones"
-            android:exported="false" />
-        <activity
-            android:name=".activity_mapa_empleos"
-            android:exported="false" />
-        <activity
-            android:name=".activity_inicio"
-            android:exported="false" />
-        <activity
-            android:name=".activity_registro_paso_3"
-            android:exported="false" />
-        <activity
-            android:name=".activity_registro_paso_2"
-            android:exported="false" />
-        <activity
-            android:name=".activity_registro_paso_1"
-            android:exported="false" />
-        <activity
-            android:name=".activity_iniciar_sesion"
-            android:exported="false" />
-        <activity
-            android:name=".activity_bienvenida"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity2"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDBW6TWCn0AjFYIqbdRkyup4cQuytTryEI" />
+
+        <activity
+            android:name=".editar_perfil"
+            android:exported="false" />
+        <activity
+            android:name=".ui.lista.ListaOfertasActivity"
+            android:exported="false" />
+        <activity
+            android:name=".seguimiento_postulacion"
+            android:exported="false" />
+        <activity
+            android:name=".filtrar_ofertas"
+            android:exported="false" />
+        <activity
+            android:name=".notificaciones"
+            android:exported="false" />
+        <activity
+            android:name=".ui.guardadas.EmpleosGuardadosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".perfil_empresa"
+            android:exported="false" />
+        <activity
+            android:name=".ui.detalle.DetalleOfertaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".perfil"
+            android:exported="false" />
+        <activity
+            android:name=".ui.postulaciones.PostulacionesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.mapa.MapaActivity"
+            android:exported="false" />
+        <activity
+            android:name=".inicio"
+            android:exported="false" />
+        <activity
+            android:name=".ui.registro.RegistroPaso3Activity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.registro.RegistroPaso2Activity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.registro.RegistroPaso1Activity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.auth.iniciar_sesion"
+            android:exported="true" />
+        <activity
+            android:name=".ui.auth.BienvenidaActivity"
+            android:exported="true">
+             <intent-filter>
+             <action android:name="android.intent.action.MAIN" />
+             <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>
         </activity>
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:exported="false"/>
     </application>
 
 </manifest>
